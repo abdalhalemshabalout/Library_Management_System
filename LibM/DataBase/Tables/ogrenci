@@ -1,0 +1,10 @@
+CREATE TABLE [dbo].[ogrenci] (
+    [ogrenciID]         INT          NOT NULL,
+    [ogrenciAdi]        VARCHAR (50) NOT NULL,
+    [ogrenciSoyad]      VARCHAR (50) NOT NULL,
+    [bolum]             VARCHAR (50) NOT NULL,
+    [ogrenciTel]        NCHAR (11)   NULL,
+    [ogrenciKayitTarih] DATETIME     NOT NULL,
+    CONSTRAINT [PK_ogrenci] PRIMARY KEY CLUSTERED ([ogrenciID] ASC)
+);
+
