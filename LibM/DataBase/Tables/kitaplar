@@ -1,1 +1,15 @@
+CREATE TABLE [dbo].[kitaplar] (
+    [kitapID]                INT          IDENTITY (100, 1) NOT NULL,
+    [kitapAdi]               VARCHAR (50) NOT NULL,
+    [yayinTarihi]            DATETIME     NOT NULL,
+    [kirapFiyati]            FLOAT (53)   NULL,
+    [adet]                   INT          NOT NULL,
+    [yayinevleri_yayinEviID] INT          NOT NULL,
+    [kategori_kategoriID]    INT          NOT NULL,
+    [yazar_yazarID]          INT          NOT NULL,
+    CONSTRAINT [PK_kitaplar] PRIMARY KEY CLUSTERED ([kitapID] ASC),
+    CONSTRAINT [FK_kitaplar_yayinevleri] FOREIGN KEY ([yayinevleri_yayinEviID]) REFERENCES [dbo].[yayinevleri] ([yayinEviID]),
+    CONSTRAINT [FK_kitaplar_yazar] FOREIGN KEY ([yazar_yazarID]) REFERENCES [dbo].[yazar] ([yazarID]),
+    CONSTRAINT [FK_kitaplar_kategori] FOREIGN KEY ([kategori_kategoriID]) REFERENCES [dbo].[kategori] ([kategoriID])
+);
 
