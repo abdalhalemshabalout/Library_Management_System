@@ -1,0 +1,12 @@
+CREATE TABLE [dbo].[uyeler] (
+    [uyeID]      INT          IDENTITY (190260, 1) NOT NULL,
+    [uyeAdi]     VARCHAR (50) NOT NULL,
+    [uyeSoyad]   VARCHAR (50) NOT NULL,
+    [uyeEmail]   VARCHAR (50) NULL,
+    [uyeTel]     NCHAR (11)   NOT NULL,
+    [uyeAdresi]  VARCHAR (50) NULL,
+    [uyeYetkisi] NCHAR (10)   NOT NULL,
+    [sifre]      VARCHAR (50) NOT NULL,
+    CONSTRAINT [PK_uyeler] PRIMARY KEY CLUSTERED ([uyeID] ASC)
+);
+
