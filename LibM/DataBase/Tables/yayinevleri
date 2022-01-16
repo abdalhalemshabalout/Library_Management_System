@@ -1,0 +1,8 @@
+CREATE TABLE [dbo].[yayinevleri] (
+    [yayinEviID]     INT          IDENTITY (250, 1) NOT NULL,
+    [yayinEviAdi]    VARCHAR (50) NOT NULL,
+    [yayinEviAdresi] VARCHAR (50) NOT NULL,
+    [yayinEviTel]    VARCHAR (50) NOT NULL,
+    CONSTRAINT [PK_yayinevleri] PRIMARY KEY CLUSTERED ([yayinEviID] ASC)
+);
+
