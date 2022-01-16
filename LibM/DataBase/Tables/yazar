@@ -1,0 +1,9 @@
+CREATE TABLE [dbo].[yazar] (
+    [yazarID]     INT          IDENTITY (350, 1) NOT NULL,
+    [yazarAdi]    VARCHAR (50) NOT NULL,
+    [yazarEmail]  VARCHAR (50) NULL,
+    [yazarTel]    NCHAR (11)   NOT NULL,
+    [yazarAdresi] VARCHAR (50) NULL,
+    CONSTRAINT [PK_yazar] PRIMARY KEY CLUSTERED ([yazarID] ASC)
+);
+
