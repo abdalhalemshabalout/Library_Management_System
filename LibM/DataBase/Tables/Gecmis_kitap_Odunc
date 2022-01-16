@@ -1,0 +1,11 @@
+CREATE TABLE [dbo].[Gecmis_kitap_Odunc] (
+    [ID]                INT      IDENTITY (1, 1) NOT NULL,
+    [iade_Etme_Tarihi]  DATETIME NOT NULL,
+    [ogrenci_ogrenciID] INT      NOT NULL,
+    [uyeler_uyeID]      INT      NOT NULL,
+    [kitaplar_kitapID]  INT      NOT NULL,
+    [baslamaTarihi]     DATETIME NOT NULL,
+    [bitisTarihi]       DATETIME NOT NULL,
+    CONSTRAINT [PK_Gecmis_kitap_Odunc] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+
