@@ -1,0 +1,12 @@
+CREATE TABLE [dbo].[kitapOdunc] (
+    [ogrenci_ogrenciID] INT      NOT NULL,
+    [uyeler_uyeID]      INT      NOT NULL,
+    [kitaplar_kitapID]  INT      NOT NULL,
+    [baslamaTarihi]     DATETIME NOT NULL,
+    [bitisTarihi]       DATETIME NOT NULL,
+    CONSTRAINT [PK_kitapOdunc_1] PRIMARY KEY CLUSTERED ([ogrenci_ogrenciID] ASC, [kitaplar_kitapID] ASC),
+    CONSTRAINT [FK_kitapOdunc_uyeler] FOREIGN KEY ([uyeler_uyeID]) REFERENCES [dbo].[uyeler] ([uyeID]),
+    CONSTRAINT [FK_kitapOdunc_kitaplar] FOREIGN KEY ([kitaplar_kitapID]) REFERENCES [dbo].[kitaplar] ([kitapID]),
+    CONSTRAINT [FK_kitapOdunc_ogrenci] FOREIGN KEY ([ogrenci_ogrenciID]) REFERENCES [dbo].[ogrenci] ([ogrenciID])
+);
+
