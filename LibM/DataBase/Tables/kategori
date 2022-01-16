@@ -1,0 +1,7 @@
+CREATE TABLE [dbo].[kategori] (
+    [kategoriID]          INT           IDENTITY (100, 1) NOT NULL,
+    [kategoriAdi]         VARCHAR (50)  NOT NULL,
+    [kategoriAyrintilari] VARCHAR (150) NOT NULL,
+    CONSTRAINT [PK_kategori] PRIMARY KEY CLUSTERED ([kategoriID] ASC)
+);
+
