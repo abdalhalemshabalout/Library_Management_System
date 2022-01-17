@@ -250,8 +250,15 @@ namespace thebook.PL
 
         //EKLEME
         private void bunifuThinButton23_Click_1(object sender, EventArgs e)
-        {
-        
+        { 
+         /// ADD YAZAR
+            if (State == "YAZAR")
+            {
+                PL.FRM_ADDYAZAR ADDYAZAR = new FRM_ADDYAZAR();
+                ADDYAZAR.btnYazar.ButtonText = "Ekleme";
+                ADDYAZAR.ID = 0;
+                bunifuTransition1.ShowSync(ADDYAZAR);
+            }
          // add ogrenci
             if (State == "STUDENT")
             {
