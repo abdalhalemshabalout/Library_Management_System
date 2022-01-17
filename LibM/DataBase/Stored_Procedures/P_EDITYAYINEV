@@ -1,0 +1,8 @@
+CREATE PROCEDURE P_EDITYAYINEV
+	@yayinEviID int ,
+	@yayinEviAdi VARCHAR (50),
+	@yayinEviTel VARCHAR(50),
+	@yayinEviAdresi VARCHAR(50)
+AS
+	UPDATE dbo.yayinevleri  SET yayinEviAdi =@yayinEviAdi,yayinEviTel =@yayinEviTel,yayinEviAdresi =@yayinEviAdresi
+	WHERE yayinEviID = @yayinEviID;
