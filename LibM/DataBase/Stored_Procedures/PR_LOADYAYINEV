@@ -1,0 +1,5 @@
+CREATE PROCEDURE PR_LOADYAYINEV
+
+AS
+
+	SELECT * FROM dbo.yayinevleri ;
