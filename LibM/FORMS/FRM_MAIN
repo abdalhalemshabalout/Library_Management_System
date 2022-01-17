@@ -413,7 +413,15 @@ namespace thebook.PL
 
         //SEARSH
         private void bunifuMaterialTextbox1_OnValueChanged(object sender, EventArgs e)
-        {
+        {    
+            /// Search YAYZAR
+            if (State == "YAZAR")
+            {
+                DataTable dt = new DataTable();
+                dt = BLYAZAR.Search(bunifuMaterialTextbox1.Text);
+                dataGridView1.DataSource = dt;
+
+            }
             /// Search OGRENCI
             if (State == "STUDENT")
             {
