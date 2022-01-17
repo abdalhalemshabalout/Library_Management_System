@@ -1,0 +1,14 @@
+CREATE PROCEDURE P_EDITOGRENCI
+	@ogrenciID int ,
+	@ogrenciAdi VARCHAR (50),
+	@ogrenciSoyad VARCHAR(50),
+	@ogrenciTel nchar(11),
+	@bolum VARCHAR(50)
+	
+AS
+	UPDATE dbo.ogrenci  SET
+	ogrenciAdi=@ogrenciAdi,
+	ogrenciSoyad=@ogrenciSoyad,
+	ogrenciTel=@ogrenciTel,
+	bolum=@bolum
+	WHERE ogrenciID = @ogrenciID;
