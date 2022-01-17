@@ -1,0 +1,10 @@
+CREATE PROCEDURE P_ADDYAZAR
+	@yazarAdi VARCHAR (50),
+	@yazarEmail VARCHAR(50),
+	@yazarTel		nchar(11),
+	@yazarAdresi  VARCHAR(50)
+
+AS
+	INSERT INTO dbo.yazar(yazarAdi,yazarEmail,yazarTel,yazarAdresi)
+	VALUES
+	(@yazarAdi,@yazarEmail,@yazarTel,@yazarAdresi);
