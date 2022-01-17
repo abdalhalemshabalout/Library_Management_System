@@ -1,0 +1,8 @@
+CREATE PROCEDURE P_SEARCHOGRENCI
+	@Search varchar(50)
+AS
+	SELECT * FROM dbo.ogrenci WHERE ogrenciID LIKE'%'+@Search+'%' 
+	OR ogrenciAdi LIKE'%'+@Search+'%' 
+	OR ogrenciSoyad LIKE'%'+@Search+'%'
+	OR ogrenciKayitTarih LIKE'%'+@Search+'%'
+	OR bolum LIKE'%'+@Search+'%';
