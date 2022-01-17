@@ -1,0 +1,4 @@
+CREATE PROCEDURE P_DELETOGRENCI
+	@ogrenciID int
+AS
+	DELETE FROM dbo.ogrenci WHERE ogrenciID = @ogrenciID;
