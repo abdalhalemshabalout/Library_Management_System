@@ -1,0 +1,9 @@
+CREATE PROCEDURE P_EDITYAZAR
+	@yazarID  int,
+	@yazarAdi VARCHAR (50),
+	@yazarEmail VARCHAR(50),
+	@yazarTel		nchar(11),
+	@yazarAdresi  VARCHAR(50)	
+AS
+	UPDATE dbo.yazar SET yazarAdi=@yazarAdi,yazarEmail=@yazarEmail,yazarTel=@yazarTel,yazarAdresi=@yazarAdresi
+	WHERE yazarID = @yazarID;
