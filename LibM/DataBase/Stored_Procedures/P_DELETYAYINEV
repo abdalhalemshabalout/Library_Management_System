@@ -1,0 +1,4 @@
+CREATE PROCEDURE P_DELETYAYINEV
+	@yayinEviID int
+AS
+	DELETE FROM dbo.yayinevleri WHERE yayinEviID = @yayinEviID;
