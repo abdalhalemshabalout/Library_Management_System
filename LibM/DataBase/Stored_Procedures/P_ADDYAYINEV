@@ -1,0 +1,9 @@
+CREATE PROCEDURE P_ADDYAYINEV
+	@yayinEviAdi VARCHAR (50),
+	@yayinEviAdresi VARCHAR(50),
+	@yayinEviTel VARCHAR(50)
+
+AS
+	INSERT INTO dbo.yayinevleri (yayinEviAdi,yayinEviTel,yayinEviAdresi)
+	VALUES
+	(@yayinEviAdi,@yayinEviTel,@yayinEviAdresi);
