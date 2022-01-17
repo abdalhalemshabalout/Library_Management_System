@@ -1,0 +1,12 @@
+CREATE PROCEDURE P_ADDOGRENCI
+	@ogrenciAdi VARCHAR (50),
+	@ogrenciSoyad VARCHAR(50),
+	@ogrenciTel		nchar(11),
+	@ogrenciKayitTarih DATETIME,
+	@ogrenciID INT,
+	@bolum VARCHAR(50)
+
+AS
+	INSERT INTO dbo.ogrenci(ogrenciID, ogrenciAdi,ogrenciSoyad,ogrenciTel,ogrenciKayitTarih,bolum)
+	VALUES
+	(@ogrenciID,@ogrenciAdi,@ogrenciSoyad,@ogrenciTel,@ogrenciKayitTarih,@bolum);
