@@ -1,0 +1,7 @@
+CREATE PROCEDURE P_SEARCHYAZAR
+	@Search varchar(50)
+AS
+	SELECT * FROM dbo.yazar WHERE yazarID LIKE'%'+@Search+'%' 
+	OR yazarAdi LIKE'%'+@Search+'%' 
+	OR yazarEmail LIKE'%'+@Search+'%'
+	OR yazarAdresi LIKE'%'+@Search+'%' ;
