@@ -1,0 +1,4 @@
+CREATE PROCEDURE P_DELETYAZAR
+	@yazarID int
+AS
+	DELETE FROM dbo.yazar WHERE yazarID = @yazarID;
