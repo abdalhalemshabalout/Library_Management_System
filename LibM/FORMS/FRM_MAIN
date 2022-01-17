@@ -21,7 +21,9 @@ namespace thebook.PL
         
         //Ogrenci 
         BL.CLC_OGRENCI BLOGRENCI = new BL.CLC_OGRENCI();
-
+        
+        //yayın evler
+         BL.CLC_YAYINEV BLYAYINEV = new BL.CLC_YAYINEV();
        
         public FRM_MAIN()
         {
@@ -231,6 +233,14 @@ namespace thebook.PL
                 bunifuTransition1.ShowSync(ADDFOGRENCI);
             }
             
+            /// ADD YAYIN EV
+            if (State == "YAYEV")
+            {
+                PL.FRM_ADDYAYINEV ADDFYAYINEV = new FRM_ADDYAYINEV();
+                ADDFYAYINEV.btnYayinEv.ButtonText = "Ekleme";
+                ADDFYAYINEV.ID = 0;
+                bunifuTransition1.ShowSync(ADDFYAYINEV);
+            }
         }
 
         private void FRM_MAIN_Activated(object sender, EventArgs e)
@@ -266,7 +276,22 @@ namespace thebook.PL
                     ADDFOGRENCI.txtOgrenciTarih.Enabled = false;
                     bunifuTransition1.ShowSync(ADDFOGRENCI);
                 }
-               }
+                
+              /// Update YAYIN EV
+                if (State == "YAYEV")
+                {
+                    PL.FRM_ADDYAYINEV ADDFYAYINEV = new FRM_ADDYAYINEV();
+                    ADDFYAYINEV.btnYayinEv.ButtonText = "Düzeltme";
+                    ADDFYAYINEV.ID = Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value);
+                    ADDFYAYINEV.txtYayinEvAd.Text = Convert.ToString(dataGridView1.CurrentRow.Cells[1].Value).Trim();
+                    ADDFYAYINEV.txtYayinEvAdres.Text = Convert.ToString(dataGridView1.CurrentRow.Cells[2].Value).Trim();
+                    ADDFYAYINEV.txtYayinEvTel.Text = Convert.ToString(dataGridView1.CurrentRow.Cells[3].Value).Trim();
+
+
+                    bunifuTransition1.ShowSync(ADDFYAYINEV);
+                }
+                
+            }
              
 
         }
@@ -297,8 +322,27 @@ namespace thebook.PL
                         Ferror.Lb_Title.Text = "!!!  UYARI !!!  \n // SİLMEK İSTEDİĞNİZ ÇĞRENCİ SİSTEMDE\n KENİSİNE AİT KAYITLI İŞLEMLER VARDIR !! ";
                         Ferror.Show();
                     }
+                    
+                /// DELETE YAYIN EV
+                if (State == "YAYEV")
+                {
+
+                    BLYAYINEV.Delete(Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value));
+                    if (BLYAYINEV.hata != 0)
+                    {
+                        PL.FRM_DDELETE Fdelete = new FRM_DDELETE();
+                        Fdelete.Show();
+                    }
+                    else
+                    {
+                        PL.FRM_ERRORINSERT Ferror = new FRM_ERRORINSERT();
+                        Ferror.Lb_Title.Text = "!!!  UYARI !!!  \n SİLMEK İSTEDİĞNİZ YAYIN EVI SİSTEMDE \n KAYITLI BİR KİTABA AİT OLDUĞUNU OLMAKTADIR !! ";
+                        Ferror.Show();
+                    }
+
                 }
               }
+            }
         }
 
         //SEARSH
@@ -311,6 +355,15 @@ namespace thebook.PL
                 dt = BLOGRENCI.Search(bunifuMaterialTextbox1.Text);
                 dataGridView1.DataSource = dt;
                 Ogrenci_Satir_Renklendirme();
+
+            }
+            
+            /// Search YAYIN EVI
+            if (State == "YAYEV")
+            {
+                DataTable dt = new DataTable();
+                dt = BLYAYINEV.Search(bunifuMaterialTextbox1.Text);
+                dataGridView1.DataSource = dt;
 
             }
         }
@@ -326,6 +379,33 @@ namespace thebook.PL
         private void button9_Click(object sender, EventArgs e)
         {
           
+            setcolor(); // color change
+            button9.BackColor = Color.FromArgb(00, 00, 28);
+            Button_Visible_false();
+            P_HOME.Visible = false;
+            P_MAIN.Visible = true;
+            bunifuThinButton21.Visible = true;
+            bunifuThinButton23.Visible = true;
+            bunifuThinButton22.Visible = true;
+            State = "YAYEV";
+            Lb_Title.Text = "Yayın Evleri";
+            // Load Data
+            try
+            {
+                DataTable dt = new DataTable();
+                dt = BLYAYINEV.load();
+                dataGridView1.DataSource = dt;
+                dataGridView1.Columns[0].HeaderText = "ID";
+                dataGridView1.Columns[1].HeaderText = "Ad";
+                dataGridView1.Columns[2].HeaderText = "Adres";
+                dataGridView1.Columns[3].HeaderText = "Tel";
+                
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         //KULLANICI EKLEME FOR HOME
