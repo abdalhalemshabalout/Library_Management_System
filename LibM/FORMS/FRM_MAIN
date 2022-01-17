@@ -287,7 +287,23 @@ namespace thebook.PL
             }
             
             else
-            {/// Update ogrenci
+            {
+            
+               /// Update YAZAR
+                if (State == "YAZAR")
+                {
+                    PL.FRM_ADDYAZAR ADDFYAZAR = new FRM_ADDYAZAR();
+                    ADDFYAZAR.btnYazar.ButtonText = "Düzeltme";
+                    ADDFYAZAR.ID = Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value);
+                    ADDFYAZAR.txtYazarAd.Text = Convert.ToString(dataGridView1.CurrentRow.Cells[1].Value).Trim();
+                    ADDFYAZAR.txtYazarEmail.Text = Convert.ToString(dataGridView1.CurrentRow.Cells[2].Value).Trim();
+                    ADDFYAZAR.txtYazarTel.Text = Convert.ToString(dataGridView1.CurrentRow.Cells[3].Value).Trim();
+                    ADDFYAZAR.txtYazarAdres.Text = Convert.ToString(dataGridView1.CurrentRow.Cells[4].Value).Trim();
+
+                    bunifuTransition1.ShowSync(ADDFYAZAR);
+                }
+            
+               /// Update ogrenci
             
                 if (State == "STUDENT")
                 {
