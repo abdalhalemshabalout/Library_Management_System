@@ -373,6 +373,21 @@ namespace thebook.PL
                         Ferror.Lb_Title.Text = "!!!  UYARI !!!  \n // SİLMEK İSTEDİĞNİZ ÇĞRENCİ SİSTEMDE\n KENİSİNE AİT KAYITLI İŞLEMLER VARDIR !! ";
                         Ferror.Show();
                     }
+                /// DELETE YAZAR
+                if (State == "YAZAR")
+                {
+                    BLYAZAR.Delete(Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value));
+                    if (BLYAZAR.hata != 0)
+                    {
+                        PL.FRM_DDELETE Fdelete = new FRM_DDELETE();
+                        Fdelete.Show();
+                    }
+                    else
+                    {
+                        PL.FRM_ERRORINSERT Ferror = new FRM_ERRORINSERT();
+                        Ferror.Lb_Title.Text = "!!!  UYARI !!!  \n SİLMEK İSTEDİĞNİZ YAZARI SİSTEMDE \n KAYITLI BİR KİTABA AİT OLDUĞUNU OLMAKTADIR !! ";
+                        Ferror.Show();
+                        
                     
                 /// DELETE YAYIN EV
                 if (State == "YAYEV")
