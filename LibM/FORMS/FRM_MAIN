@@ -18,6 +18,8 @@ namespace thebook.PL
         int ID;
         public int Aktif_Kullanci_ID;
         public String Aktif_Kullanci_Yetkisi;
+        //yazar 
+        BL.CLC_YAZAR BLYAZAR = new BL.CLC_YAZAR()
         
         //Ogrenci 
         BL.CLC_OGRENCI BLOGRENCI = new BL.CLC_OGRENCI();
