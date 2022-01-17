@@ -1,0 +1,6 @@
+CREATE PROCEDURE P_SEARCHYAYINEV
+	@Search varchar(50)
+AS
+	SELECT * FROM dbo.yayinevleri WHERE yayinEviID LIKE'%'+@Search+'%' 
+	OR yayinEviAdi LIKE'%'+@Search+'%' 
+	OR yayinEviAdresi LIKE'%'+@Search+'%' ;
