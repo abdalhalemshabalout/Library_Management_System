@@ -1,0 +1,434 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Data.SqlClient;
+using System.Diagnostics;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace thebook.PL
+{
+    public partial class FRM_MAIN : Form
+    {
+        String State;
+        int ID;
+        public int Aktif_Kullanci_ID;
+        public String Aktif_Kullanci_Yetkisi;
+
+       
+        public FRM_MAIN()
+        {
+            InitializeComponent();
+        }
+
+        private void FRM_MAIN_Load(object sender, EventArgs e)
+        {
+            button1.BackColor = Color.FromArgb(00, 00, 28);
+            P_HOME.Visible = true;
+            P_MAIN.Visible = false;
+            Lb_Title.Text = "Ana Sayfa";
+
+           
+        }
+
+       
+     
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+   
+        //KAPATMA FOR TİTLE BAR
+        private void bunifuImageButton6_Click(object sender, EventArgs e)
+        {
+            Environment.Exit(0);
+        }
+
+        private void bunifuImageButton3_Click(object sender, EventArgs e)
+        {
+
+        }
+        //ÇIKIŞ YAPMA FOR TİTLE BAR
+        private void bunifuImageButton2_Click(object sender, EventArgs e)
+        {
+            
+           
+        }
+
+
+        //BÜYÜTME FOR TİTLE BAR
+        private void bunifuImageButton4_Click(object sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Normal)
+            {
+                this.WindowState = FormWindowState.Maximized;
+            }
+            else
+            {
+                this.WindowState = FormWindowState.Normal;
+            }
+        }
+        //KÜÇÜLTE FOR TİTLE BAR
+        private void bunifuImageButton1_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+        //ANASAYFA FOR MAİN BAR
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void P_HOME_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+        
+        }
+
+        private void button13_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        //KİTAPLAR FOR MAİN BAR
+        private void button18_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        //ODUNC  FOR MAİN BAR
+        private void button14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //SATIŞ  FOR MAİN BAR
+        private void button15_Click(object sender, EventArgs e)
+        {
+           
+
+        }
+
+        //KATEGORİ  FOR MAİN BAR
+        private void button16_Click(object sender, EventArgs e)
+        {
+        
+
+        }
+        //ÖĞRENCİLER  FOR MAİN BAR
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+          
+            
+        }
+        //KULLANICILAR  FOR MAİN BAR
+        private void button13_Click_2(object sender, EventArgs e)
+        {
+            
+        }
+        //KATEGORİ EKLEME FOR HOME
+        private void button3_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        //KİTAP EKLEME FOR HOME
+        private void button2_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        //YAZAR EKLEME FOR HOME
+        private void button4_Click(object sender, EventArgs e)
+        {
+          
+        }
+
+        //YAYIN EV EKLEME FOR HOME
+        private void button5_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        //ÖĞRENCİ EKLEME FOR HOME
+        private void button6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bunifuThinButton21_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bunifuThinButton22_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bunifuThinButton23_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //EKLEME
+        private void bunifuThinButton23_Click_1(object sender, EventArgs e)
+        {
+         
+        }
+
+        private void FRM_MAIN_Activated(object sender, EventArgs e)
+        {
+           
+
+        }
+
+        //DÜZELTME
+        private void bunifuThinButton22_Click_1(object sender, EventArgs e)
+        {
+             
+
+        }
+
+        //SİLME
+        private void bunifuThinButton21_Click_1(object sender, EventArgs e)
+        {
+          
+        }
+
+        //SEARSH
+        private void bunifuMaterialTextbox1_OnValueChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        //YAZARLAR  FOR MAİN BAR
+        private void button8_Click(object sender, EventArgs e)
+        {
+           
+
+        }
+
+        //YAYINEVLERİ  FOR MAİN BAR
+        private void button9_Click(object sender, EventArgs e)
+        {
+          
+        }
+
+        //KULLANICI EKLEME FOR HOME
+        private void button7_Click_1(object sender, EventArgs e)
+        {
+            
+        }
+
+        //SATIŞ YAP
+        private void btnSatisIslemi_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        //AYRINTILAR
+        private void bunifuThinButton24_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void OduncSayisi_Paint(object sender, PaintEventArgs e)
+        {
+            
+        }
+
+        private void OduncSayisi_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void panel3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel3_DoubleClick(object sender, EventArgs e)
+        {
+          
+        }
+
+        private void OduncSayisi_DoubleClick(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void panel2_DoubleClick(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void KategoriSayisi_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void KategoriSayisi_DoubleClick(object sender, EventArgs e)
+        {
+          
+            
+        }
+
+        private void panel5_DoubleClick(object sender, EventArgs e)
+        {
+          
+        }
+
+        private void KullanciSayisi_DoubleClick(object sender, EventArgs e)
+        {
+          
+        }
+
+        private void panel4_DoubleClick(object sender, EventArgs e)
+        {
+            if (this.Aktif_Kullanci_Yetkisi != "Öğrenci")
+            {
+                button8_Click(sender, e);
+            }
+        }
+
+        private void panel1_DoubleClick(object sender, EventArgs e)
+        {
+            if (this.Aktif_Kullanci_Yetkisi != "Öğrenci")
+            {
+                button9_Click(sender, e);
+            }
+        }
+
+        //GEÇMİŞ ÖDÜNÇ  FOR MAİN BAR
+        private void button10_Click(object sender, EventArgs e)
+        {
+          
+        }
+
+        // işlemlerin Button  (ekleme - silme - düzeltme - satış - ödünç - ayrıntıları)
+        public void Button_Visible_false()
+        {
+            bunifuThinButton21.Visible = false;
+            bunifuThinButton24.Visible = false;
+            bunifuThinButton23.Visible = false;
+            bunifuThinButton22.Visible = false;
+            btnSatisIslemi.Visible = false;
+        }
+
+        // bölünlerin button  (Ana sayfa - Kitaplar - Kategori - Öğrenci - Kullanıcı - Yazar - Yayın ev - ödünç - Satış - Geçmiş Ödünç)
+        public void Bolum_Button_Visible_false()
+        {
+            button1.Visible = false;
+           
+            button18.Visible = false;
+          
+            button16.Visible = false;
+          
+            button15.Visible = false;
+          
+            button14.Visible = false;
+            
+            button13.Visible = false;
+           
+            button17.Visible = false;
+            
+            button8.Visible = false;
+         
+            button9.Visible = false;
+           
+            button10.Visible = false;
+          
+
+        }
+        // bolum button change color - defualt
+        public void setcolor()
+        {
+            button1.BackColor = Color.FromArgb(0, 0, 64);
+            button18.BackColor = Color.FromArgb(0, 0, 64);
+            button16.BackColor = Color.FromArgb(0, 0, 64);
+            button15.BackColor = Color.FromArgb(0, 0, 64);
+            button14.BackColor = Color.FromArgb(0, 0, 64);
+            button13.BackColor = Color.FromArgb(0, 0, 64);
+            button17.BackColor = Color.FromArgb(0, 0, 64);
+            button8.BackColor = Color.FromArgb(0, 0, 64);
+            button9.BackColor = Color.FromArgb(0, 0, 64);
+            button10.BackColor= Color.FromArgb(0, 0, 64);
+
+
+        }
+
+        // Ana sayfada bulunan ekleme Buttonlari
+        public void Anasayfa_Button_Visible_false()
+        {
+            button2.Visible = false;
+            button3.Visible = false;
+            button4.Visible = false;
+            button5.Visible = false;
+            button6.Visible = false;
+            button7.Visible = false;
+        }
+
+        private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            
+
+        }
+
+        private void dataGridView1_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+
+        }
+
+        private void panel3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel4_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel5_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void KullanciSayisi_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void P_TB_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+    }
+}
