@@ -1,0 +1,12 @@
+CREATE PROCEDURE P_EDITUSER
+	@uyeID int ,
+	@uyeAdi VARCHAR (50),
+	@uyeSoyad VARCHAR(50),
+	@uyeEmail VARCHAR(50),
+	@uyeTel		nchar(11),
+	@uyeAdresi VARCHAR(50),
+	@uyeYetkisi nchar(10)
+	
+AS
+	UPDATE dbo.uyeler  SET uyeAdi=@uyeAdi,uyeSoyad=@uyeSoyad,uyeEmail=@uyeEmail,uyeTel=@uyeTel,uyeAdresi=@uyeAdresi,uyeYetkisi=@uyeYetkisi
+	WHERE uyeID=@uyeID;
