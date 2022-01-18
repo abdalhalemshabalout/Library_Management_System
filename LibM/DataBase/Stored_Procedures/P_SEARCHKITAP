@@ -1,0 +1,22 @@
+CREATE PROCEDURE P_SEARCHKITAP
+	@Search varchar(50)
+AS
+		SELECT
+		kitap.kitapID,
+		kitap.kitapAdi,
+		kitap.yayinTarihi,
+		kitap.kirapFiyati,
+		kitap.adet,
+		yay.yayinEviAdi,
+		kat.kategoriAdi,
+		yaz.yazarAdi
+		FROM dbo.kitaplar as kitap INNER JOIN dbo.kategori as kat on kitap.kategori_kategoriID =kat.kategoriID
+		INNER JOIN dbo.yayinevleri as yay on kitap.yayinevleri_yayinEviID = yay.yayinEviID
+		INNER JOIN dbo.yazar as yaz on kitap.yazar_yazarID =yaz.yazarID WHERE
+		kitap.kitapID LIKE'%'+@Search+'%'
+		OR	kitap.kitapAdi LIKE'%'+@Search+'%' 
+		OR  kitap.kirapFiyati LIKE'%'+@Search+'%'
+		OR  kitap.adet LIKE'%'+@Search+'%'
+		OR  kat.kategoriAdi LIKE'%'+@Search+'%'
+		OR	yay.yayinEviAdi LIKE'%'+@Search+'%'
+		OR	yaz.yazarAdi LIKE'%'+@Search+'%';
