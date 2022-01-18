@@ -203,7 +203,35 @@ namespace thebook.PL
         //KULLANICILAR  FOR MAİN BAR
         private void button13_Click_2(object sender, EventArgs e)
         {
-            
+            setcolor(); // color change
+            button13.BackColor = Color.FromArgb(00, 00, 28);
+            Button_Visible_false();
+            P_HOME.Visible = false;
+            P_MAIN.Visible = true;
+            bunifuThinButton21.Visible = true;
+            bunifuThinButton23.Visible = true;
+            bunifuThinButton22.Visible = true;
+            State = "USER";
+            Lb_Title.Text = "Kullancılar";
+            // Load Data
+            try
+            {
+                DataTable dt = new DataTable();
+                dt = BLUSER.load();
+                dataGridView1.DataSource = dt;
+                dataGridView1.Columns[0].HeaderText = "ID";
+                dataGridView1.Columns[1].HeaderText = "Ad";
+                dataGridView1.Columns[2].HeaderText = "Soyad";
+                dataGridView1.Columns[3].HeaderText = "Email";
+                dataGridView1.Columns[4].HeaderText = "Tel";
+                dataGridView1.Columns[5].HeaderText = "Adres";
+                dataGridView1.Columns[6].HeaderText = "Yetki";
+                dataGridView1.Columns[7].HeaderText = "Şifre";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         //KATEGORİ EKLEME FOR HOME
         private void button3_Click(object sender, EventArgs e)
