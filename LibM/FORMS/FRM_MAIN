@@ -438,6 +438,32 @@ namespace thebook.PL
             else
             
             {
+              /// DELETE Kullanci
+                if (State == "USER")
+                {
+                    PL.FRM_ERRORINSERT Ferror = new FRM_ERRORINSERT();
+                    if (this.Aktif_Kullanci_ID != Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value))
+                    {
+                        BLUSER.Delete(Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value));
+                        if (BLUSER.hata != 0)
+                        {
+                            PL.FRM_DDELETE Fdelete = new FRM_DDELETE();
+                            Fdelete.Show();
+                        }
+                        else
+                        {
+
+                            Ferror.Lb_Title.Text = "!!!  UYARI !!!  \n // SİLMEK İSTEDİĞNİZ KULLANCI SİSTEMDE \n KENİSİNE AİT KAYITLI İŞLEMLER VARDIR !! ";
+                            Ferror.Show();
+                        }
+                    }
+                    else
+                    {
+                        Ferror.Lb_Title.Text = "!!!  UYARI !!!  \n       KULLANCI KENDİ KAYIDI SİLEMEZ ";
+                        Ferror.Show();
+                    }
+                }
+                
               /// DELETE KATEGORI
                 if (State == "CAT")
                 {
