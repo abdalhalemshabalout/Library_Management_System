@@ -1,0 +1,4 @@
+CREATE PROCEDURE P_SEARCH_KITAP_YAYINEV
+	@Search varchar(50)
+AS
+	SELECT yayinEviID FROM dbo.yayinevleri WHERE yayinEviAdi =@Search;
