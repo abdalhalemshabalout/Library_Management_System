@@ -1,0 +1,7 @@
+CREATE PROCEDURE P_ADDCAT
+	@kategoriAdi VARCHAR (50),
+	@kategoriAyrintilari VARCHAR(50)
+AS
+	INSERT INTO dbo.kategori (kategoriAdi,kategoriAyrintilari)
+	VALUES
+	(@kategoriAdi,@kategoriAyrintilari);
