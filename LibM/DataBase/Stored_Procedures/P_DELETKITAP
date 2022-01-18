@@ -1,0 +1,4 @@
+CREATE PROCEDURE P_DELETKITAP
+	@kitapID int
+AS
+	DELETE FROM dbo.kitaplar WHERE kitapID = @kitapID;
