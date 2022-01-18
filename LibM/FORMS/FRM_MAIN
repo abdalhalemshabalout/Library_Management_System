@@ -536,7 +536,16 @@ namespace thebook.PL
 
         //SEARSH
         private void bunifuMaterialTextbox1_OnValueChanged(object sender, EventArgs e)
-        {    
+        {   
+            /// Search Kullanci
+            if (State == "USER")
+            {
+                DataTable dt = new DataTable();
+                dt = BLUSER.Search(bunifuMaterialTextbox1.Text);
+                dataGridView1.DataSource = dt;
+
+            }
+            
             /// Search KATEGORI
             if (State == "CAT")
             {
