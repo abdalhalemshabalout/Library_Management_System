@@ -1,0 +1,5 @@
+CREATE PROCEDURE P_COMBOBOX_YAYIN_EV
+
+AS
+
+	SELECT yayinEviAdi FROM dbo.yayinevleri;
