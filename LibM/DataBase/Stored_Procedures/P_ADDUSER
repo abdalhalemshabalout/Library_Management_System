@@ -1,0 +1,13 @@
+CREATE PROCEDURE P_ADDUSER
+	@uyeAdi VARCHAR (50),
+	@uyeSoyad VARCHAR(50),
+	@uyeEmail VARCHAR(50),
+	@uyeTel		nchar(11),
+	@uyeAdresi VARCHAR(50),
+	@uyeYetkisi nchar(10),
+	@sifre	VARCHAR(50)
+
+AS
+	INSERT INTO dbo.uyeler(uyeAdi,uyeSoyad,uyeEmail,uyeTel,uyeAdresi,uyeYetkisi,sifre)
+	VALUES
+	(@uyeAdi,@uyeSoyad,@uyeEmail,@uyeTel,@uyeAdresi,@uyeYetkisi,@sifre);
