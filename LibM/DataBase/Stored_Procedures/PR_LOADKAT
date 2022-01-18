@@ -1,0 +1,5 @@
+CREATE PROCEDURE PR_LOADKAT
+
+AS
+
+	SELECT * FROM dbo.kategori;
