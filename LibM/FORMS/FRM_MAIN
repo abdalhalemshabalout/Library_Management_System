@@ -18,6 +18,10 @@ namespace thebook.PL
         int ID;
         public int Aktif_Kullanci_ID;
         public String Aktif_Kullanci_Yetkisi;
+        
+        //kategori
+        BL.CLC_CAT BLCAT = new BL.CLC_CAT();
+        
         //yazar 
         BL.CLC_YAZAR BLYAZAR = new BL.CLC_YAZAR()
         
@@ -129,7 +133,35 @@ namespace thebook.PL
         //KATEGORİ  FOR MAİN BAR
         private void button16_Click(object sender, EventArgs e)
         {
-        
+            setcolor(); // color change
+                button16.BackColor = Color.FromArgb(00, 00, 28);
+                Button_Visible_false();
+                P_HOME.Visible = false;
+                P_MAIN.Visible = true;
+                if (this.Aktif_Kullanci_Yetkisi != "Öğrenci")
+                {
+                    bunifuThinButton21.Visible = true;
+                    bunifuThinButton23.Visible = true;
+                    bunifuThinButton22.Visible = true;
+                }
+
+                State = "CAT";
+                Lb_Title.Text = "Kategori";
+                // Load Data
+                try
+                {
+                    DataTable dt = new DataTable();
+                    dt = BLCAT.load();
+                    dataGridView1.DataSource = dt;
+                    dataGridView1.Columns[0].HeaderText = "ID";
+                    dataGridView1.Columns[1].HeaderText = "Adı";
+                    dataGridView1.Columns[2].HeaderText = "Ayrıntıları";
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
 
         }
         //ÖĞRENCİLER  FOR MAİN BAR
@@ -225,7 +257,15 @@ namespace thebook.PL
         //EKLEME
         private void bunifuThinButton23_Click_1(object sender, EventArgs e)
         { 
-         /// ADD YAZAR
+          /// ADD KATEGORI
+            if (State == "CAT")
+            {
+                PL.FRM_ADDCAT ADDFCAT = new FRM_ADDCAT();
+                ADDFCAT.btnadd.ButtonText = "Ekleme";
+                ADDFCAT.ID = 0;
+                bunifuTransition1.ShowSync(ADDFCAT);
+            }
+          /// ADD YAZAR
             if (State == "YAZAR")
             {
                 PL.FRM_ADDYAZAR ADDYAZAR = new FRM_ADDYAZAR();
@@ -269,6 +309,18 @@ namespace thebook.PL
             
             else
             {
+            
+                /// Update KATEGORI
+                if (State == "CAT")
+                {
+                    PL.FRM_ADDCAT ADDFCAT = new FRM_ADDCAT();
+                    ADDFCAT.btnadd.ButtonText = "Düzeltme";
+                    ADDFCAT.ID = Convert.ToInt16(dataGridView1.CurrentRow.Cells[0].Value);
+                    ADDFCAT.txtKategoriName.Text = Convert.ToString(dataGridView1.CurrentRow.Cells[1].Value).Trim();
+                    ADDFCAT.txtKategoriAyrinti.Text = Convert.ToString(dataGridView1.CurrentRow.Cells[2].Value).Trim();
+
+                    bunifuTransition1.ShowSync(ADDFCAT);
+                }
             
                /// Update YAZAR
                 if (State == "YAZAR")
@@ -332,7 +384,25 @@ namespace thebook.PL
             
             else
             
-            { /// DELETE OGRENCI
+            {
+              /// DELETE KATEGORI
+                if (State == "CAT")
+                {
+                    BLCAT.Delete(Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value));
+                    if (BLCAT.hata != 0)
+                    {
+                        PL.FRM_DDELETE Fdelete = new FRM_DDELETE();
+                        Fdelete.Show();
+                    }
+                    else
+                    {
+                        PL.FRM_ERRORINSERT Ferror = new FRM_ERRORINSERT();
+                        Ferror.Lb_Title.Text = "!!!  UYARI !!!  \n SİLMEK İSTEDİĞNİZ KATEGORİ GRUBU SİSTEMDE \n KENİSİNE AİT KAYITLI KAİTAPLAR BULUNMAKTADIR !! ";
+                        Ferror.Show();
+                    }
+                }
+              
+              /// DELETE OGRENCI
                 if (State == "STUDENT")
                 {
                     BLOGRENCI.Delete(Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value));
@@ -388,6 +458,15 @@ namespace thebook.PL
         //SEARSH
         private void bunifuMaterialTextbox1_OnValueChanged(object sender, EventArgs e)
         {    
+            /// Search KATEGORI
+            if (State == "CAT")
+            {
+                DataTable dt = new DataTable();
+                dt=BLCAT.Search(bunifuMaterialTextbox1.Text);
+                dataGridView1.DataSource = dt;
+                        
+            }
+            
             /// Search YAYZAR
             if (State == "YAZAR")
             {
