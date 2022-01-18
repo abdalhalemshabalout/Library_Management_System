@@ -1,0 +1,5 @@
+CREATE PROCEDURE P_COMBOBOX_KATEGORI
+
+AS
+
+	SELECT kategoriAdi FROM dbo.kategori;
