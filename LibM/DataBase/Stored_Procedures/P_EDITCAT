@@ -1,0 +1,7 @@
+CREATE PROCEDURE P_EDITCAT
+	@kategoriAdi VARCHAR (50),
+	@kategoriAyrintilari VARCHAR(50),
+	@kategoriID int
+AS
+	UPDATE dbo.kategori  SET kategoriAdi=@kategoriAdi,kategoriAyrintilari=@kategoriAyrintilari
+	WHERE kategoriID=@kategoriID;
