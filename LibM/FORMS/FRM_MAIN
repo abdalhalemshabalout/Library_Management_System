@@ -286,6 +286,14 @@ namespace thebook.PL
         //EKLEME
         private void bunifuThinButton23_Click_1(object sender, EventArgs e)
         { 
+           ///ADD KULLANCILAR
+           if (State == "USER")
+            {
+                PL.FRM_ADDUSER ADDFUSER = new FRM_ADDUSER();
+                ADDFUSER.bunifuThinButton23.ButtonText = "Ekleme";
+                ADDFUSER.ID = 0;
+                bunifuTransition1.ShowSync(ADDFUSER);
+            }
           /// ADD KATEGORI
             if (State == "CAT")
             {
