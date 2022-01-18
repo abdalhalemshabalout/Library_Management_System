@@ -1,0 +1,5 @@
+CREATE PROCEDURE P_COMBOBOX_KITAP_ID
+
+AS
+
+	SELECT kitapID FROM dbo.kitaplar;
