@@ -1,0 +1,13 @@
+CREATE PROCEDURE P_ADDKITAP
+	@kitapAdi	VARCHAR(50),
+	@yayinTarihi DATETIME,
+	@kirapFiyati FLOAT,
+	@adet INT,
+	@yayinevleri_yayinEviID INT,
+	@kategori_kategoriID INT,
+	@yazar_yazarID	INT
+
+AS
+	INSERT INTO dbo.kitaplar(kitapAdi,yayinTarihi,kirapFiyati,adet,yayinevleri_yayinEviID,kategori_kategoriID,yazar_yazarID)
+	VALUES
+	(@kitapAdi,@yayinTarihi,@kirapFiyati,@adet,@yayinevleri_yayinEviID,@kategori_kategoriID,@yazar_yazarID);
