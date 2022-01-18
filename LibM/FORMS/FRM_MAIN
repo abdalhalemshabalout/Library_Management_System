@@ -32,6 +32,9 @@ namespace thebook.PL
         //yayın evler
          BL.CLC_YAYINEV BLYAYINEV = new BL.CLC_YAYINEV();
        
+       // Kitap
+        BL.CLC_KITAP BLKITAP = new BL.CLC_KITAP();
+
         public FRM_MAIN()
         {
             InitializeComponent();
@@ -115,7 +118,44 @@ namespace thebook.PL
         //KİTAPLAR FOR MAİN BAR
         private void button18_Click(object sender, EventArgs e)
         {
+              setcolor(); // color change
+            button18.BackColor = Color.FromArgb(00, 00, 28);
+            P_HOME.Visible = false;
+            P_MAIN.Visible = true;
+            if (this.Aktif_Kullanci_Yetkisi != "Öğrenci")
+            {
+                btnSatisIslemi.Visible = true;
+                bunifuThinButton21.Visible = true;
+                bunifuThinButton24.Visible = true;
+                bunifuThinButton23.Visible = true;
+                bunifuThinButton22.Visible = true;
+            }
             
+
+            bunifuThinButton24.ButtonText = "Ödünç";
+            btnSatisIslemi.ButtonText = "Satış Yap";
+            State = "BOOK";
+            Lb_Title.Text = "Kitaplar";
+            // Load Data
+            try
+            {
+                DataTable dt = new DataTable();
+                dt = BLKITAP.load();
+                dataGridView1.DataSource = dt;
+                dataGridView1.Columns[0].HeaderText = "ID";
+                dataGridView1.Columns[1].HeaderText = "Ad";
+                dataGridView1.Columns[2].HeaderText = "Yayın Tarihi";
+                dataGridView1.Columns[3].HeaderText = "Fiyat";
+                dataGridView1.Columns[4].HeaderText = "Adet";
+                dataGridView1.Columns[5].HeaderText = "Yayın Ev";
+                dataGridView1.Columns[6].HeaderText = "Kategori";
+                dataGridView1.Columns[7].HeaderText = "yazar";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
 
         //ODUNC  FOR MAİN BAR
@@ -327,6 +367,15 @@ namespace thebook.PL
                 ADDFYAYINEV.ID = 0;
                 bunifuTransition1.ShowSync(ADDFYAYINEV);
             }
+            
+             /// ADD Kitap
+            if (State == "BOOK")
+            {
+                PL.FRM_ADDKITAP ADDFKITAP = new FRM_ADDKITAP();
+                ADDFKITAP.btnKitap.ButtonText = "Ekleme";
+                ADDFKITAP.ID = 0;
+                bunifuTransition1.ShowSync(ADDFKITAP);
+            }
         }
 
         private void FRM_MAIN_Activated(object sender, EventArgs e)
@@ -421,6 +470,24 @@ namespace thebook.PL
                     bunifuTransition1.ShowSync(ADDFYAYINEV);
                 }
                 
+                /// Update KITAP
+                if (State == "BOOK")
+                {
+                    PL.FRM_ADDKITAP ADDKITAP = new FRM_ADDKITAP();
+                    ADDKITAP.linkLabel1.Enabled = false;
+                    ADDKITAP.btnKitap.ButtonText = "Düzeltme";
+                    ADDKITAP.ID = Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value);
+                    ADDKITAP.txtKitapAd.Text = Convert.ToString(dataGridView1.CurrentRow.Cells[1].Value).Trim();
+                    ADDKITAP.txtKitapYayinTarihi.Text = Convert.ToString(dataGridView1.CurrentRow.Cells[2].Value).Trim();
+                    ADDKITAP.txtKitapFiyat.Text = Convert.ToString(dataGridView1.CurrentRow.Cells[3].Value).Trim();
+                    ADDKITAP.txtKitapAdet.Text = Convert.ToString(dataGridView1.CurrentRow.Cells[4].Value).Trim();
+                    ADDKITAP.txtKitapYayinEv.Text = Convert.ToString(dataGridView1.CurrentRow.Cells[5].Value).Trim();
+                    ADDKITAP.txtKitapKategori.Text = Convert.ToString(dataGridView1.CurrentRow.Cells[6].Value).Trim();
+                    ADDKITAP.txtKitapYazar.Text = Convert.ToString(dataGridView1.CurrentRow.Cells[7].Value).Trim();
+
+                    bunifuTransition1.ShowSync(ADDKITAP);
+                }
+                
             }
              
 
@@ -496,6 +563,7 @@ namespace thebook.PL
                         Ferror.Lb_Title.Text = "!!!  UYARI !!!  \n // SİLMEK İSTEDİĞNİZ ÇĞRENCİ SİSTEMDE\n KENİSİNE AİT KAYITLI İŞLEMLER VARDIR !! ";
                         Ferror.Show();
                     }
+                }  
                 /// DELETE YAZAR
                 if (State == "YAZAR")
                 {
@@ -510,7 +578,8 @@ namespace thebook.PL
                         PL.FRM_ERRORINSERT Ferror = new FRM_ERRORINSERT();
                         Ferror.Lb_Title.Text = "!!!  UYARI !!!  \n SİLMEK İSTEDİĞNİZ YAZARI SİSTEMDE \n KAYITLI BİR KİTABA AİT OLDUĞUNU OLMAKTADIR !! ";
                         Ferror.Show();
-                        
+                     }
+                 }     
                     
                 /// DELETE YAYIN EV
                 if (State == "YAYEV")
@@ -530,7 +599,21 @@ namespace thebook.PL
                     }
 
                 }
-              }
+                /// DELETE kitap
+                if (State == "BOOK")
+                {
+                    BLKITAP.Delete(Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value));
+                    if (BLKITAP.hata != 0)
+                    {
+                        PL.FRM_DDELETE Fdelete = new FRM_DDELETE();
+                        Fdelete.Show();
+                    }
+                    else
+                    {
+                        PL.FRM_ERRORINSERT Ferror = new FRM_ERRORINSERT();
+                        Ferror.Lb_Title.Text = "!!!  UYARI !!!  \n SİLMEK İSTEDİĞNİZ KITAP \n DAHA ÖNCE SATIŞ VEYA ÖDÜNÇ İŞLEMLERİ YAPILDI !! ";
+                        Ferror.Show();
+                    }
             }
         }
 
@@ -582,6 +665,17 @@ namespace thebook.PL
                 dataGridView1.DataSource = dt;
 
             }
+                  
+            /// Search Kitap
+            if (State == "BOOK")
+            {
+                DataTable dt = new DataTable();
+                dt = BLKITAP.Search(bunifuMaterialTextbox1.Text);
+                dataGridView1.DataSource = dt;
+                this.Kitap_satir_Renklendirme();
+
+            }
+            
         }
 
         //YAZARLAR  FOR MAİN BAR
