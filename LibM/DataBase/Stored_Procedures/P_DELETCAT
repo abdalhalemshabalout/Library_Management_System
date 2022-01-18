@@ -1,0 +1,4 @@
+CREATE PROCEDURE P_DELETCAT
+	@kategoriID int
+AS
+	DELETE FROM dbo.kategori WHERE kategoriID = @kategoriID;
