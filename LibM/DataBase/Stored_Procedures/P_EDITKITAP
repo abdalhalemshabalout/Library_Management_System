@@ -1,0 +1,20 @@
+CREATE PROCEDURE P_EDITKITAP
+	@kitapID int ,
+	@kitapAdi	VARCHAR(50),
+	@yayinTarihi DATETIME,
+	@kirapFiyati FLOAT,
+	@adet INT,
+	@yayinevleri_yayinEviID INT,
+	@kategori_kategoriID INT,
+	@yazar_yazarID	INT
+	
+AS
+	UPDATE dbo.kitaplar  SET
+	kitapAdi=@kitapAdi,
+	yayinTarihi=@yayinTarihi,
+	kirapFiyati=@kirapFiyati,
+	adet=@adet,
+	yayinevleri_yayinEviID=@yayinevleri_yayinEviID,
+	kategori_kategoriID=@kategori_kategoriID,
+	yazar_yazarID=@yazar_yazarID
+	WHERE kitapID = @kitapID;
