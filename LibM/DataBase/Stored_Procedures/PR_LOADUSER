@@ -1,0 +1,5 @@
+CREATE PROCEDURE PR_LOADUSER
+
+AS
+
+	SELECT * FROM dbo.uyeler;
