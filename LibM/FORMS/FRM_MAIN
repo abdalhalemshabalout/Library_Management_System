@@ -18,7 +18,8 @@ namespace thebook.PL
         int ID;
         public int Aktif_Kullanci_ID;
         public String Aktif_Kullanci_Yetkisi;
-        
+        //kullancılar 
+        BL.CLC_USER BLUSER = new BL.CLC_USER();
         //kategori
         BL.CLC_CAT BLCAT = new BL.CLC_CAT();
         
