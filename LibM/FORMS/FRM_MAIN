@@ -346,7 +346,23 @@ namespace thebook.PL
             
             else
             {
-            
+                /// Update kullancı
+                if (State == "USER")
+                {
+                    PL.FRM_ADDUSER ADDFUSER = new FRM_ADDUSER();
+                    ADDFUSER.bunifuThinButton23.ButtonText = "Düzeltme";
+                    ADDFUSER.ID = Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value);
+                    ADDFUSER.txtUserAd.Text = Convert.ToString(dataGridView1.CurrentRow.Cells[1].Value).Trim();
+                    ADDFUSER.txtUserSoyad.Text = Convert.ToString(dataGridView1.CurrentRow.Cells[2].Value).Trim();
+                    ADDFUSER.txtUserEmail.Text = Convert.ToString(dataGridView1.CurrentRow.Cells[3].Value).Trim();
+                    ADDFUSER.txtUserTel.Text = Convert.ToString(dataGridView1.CurrentRow.Cells[4].Value).Trim();
+                    ADDFUSER.txtUserAdres.Text = Convert.ToString(dataGridView1.CurrentRow.Cells[5].Value).Trim();
+                    ADDFUSER.txtUserYetki.Text = Convert.ToString(dataGridView1.CurrentRow.Cells[6].Value).Trim();
+                    ADDFUSER.txtUserSifre.Text = Convert.ToString(dataGridView1.CurrentRow.Cells[7].Value).Trim();
+
+                    bunifuTransition1.ShowSync(ADDFUSER);
+                }
+                
                 /// Update KATEGORI
                 if (State == "CAT")
                 {
