@@ -1,0 +1,9 @@
+CREATE PROCEDURE P_SEARCHUSER
+	@Search varchar(50)
+AS
+	SELECT * FROM dbo.uyeler WHERE uyeID LIKE'%'+@Search+'%' 
+	OR uyeAdi LIKE'%'+@Search+'%' 
+	OR uyeSoyad LIKE'%'+@Search+'%' 
+	OR uyeYetkisi LIKE'%'+@Search+'%'
+	OR uyeAdi LIKE'%'+@Search+'%'
+	OR uyeTel LIKE'%'+@Search+'%';
