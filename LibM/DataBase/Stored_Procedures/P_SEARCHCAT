@@ -1,0 +1,4 @@
+CREATE PROCEDURE P_SEARCHCAT
+	@Search varchar(50)
+AS
+	SELECT * FROM dbo.kategori WHERE kategoriID LIKE'%'+@Search+'%' OR kategoriAdi LIKE'%'+@Search+'%';
