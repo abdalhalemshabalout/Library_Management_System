@@ -1,0 +1,10 @@
+CREATE PROCEDURE P_ADDODUNC
+	@uyeID INT,
+	@ogrenciID INT,
+	@kitapID INT ,
+	@baslamaTarih DATETIME,
+	@bitisTarih DATETIME
+AS
+	INSERT INTO dbo.kitapOdunc (ogrenci_ogrenciID ,uyeler_uyeID ,kitaplar_kitapID ,baslamaTarihi,bitisTarihi)
+	VALUES
+	(@ogrenciID,@uyeID,@kitapID,@baslamaTarih,@bitisTarih);
