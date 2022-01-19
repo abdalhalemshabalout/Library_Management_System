@@ -758,8 +758,40 @@ namespace thebook.PL
         //AYRINTILAR
         private void bunifuThinButton24_Click(object sender, EventArgs e)
         {
+          PL.FRM_ERRORINSERT ror = new FRM_ERRORINSERT();
+            if (dataGridView1.Rows.Count == 0)
+            {
+                MessageBox.Show("Bu işlemi gerçekleştirmek için Listede Kayıt bulunmamaktadır");
+            }
+            else
+            {
+                if (State == "BOOK")
+                {
+                    if (Convert.ToInt32(dataGridView1.CurrentRow.Cells[4].Value) == 0)
+                    {
+                        ror.Lb_Title.Text = "!!!UYARI !!! \n İSTEDİĞİNİZ KİTAP ŞUANDA \n KÜTÜPHANEDE YETERLİ SAYIDA BULUNMAMAKTADIR ";
+                        ror.Show();
+                    }
+                    else
+                    {
+                        PL.FRM_ADDODUNC ADDODUNC = new FRM_ADDODUNC();
+                        ADDODUNC.Aktif_Kullanci_ID = this.Aktif_Kullanci_ID;
+                        ADDODUNC.btnOdunc.ButtonText = "Ödünç Yap";
+                        ADDODUNC.txtOduncKitapIDliste.Enabled = false;
+                        ADDODUNC.txtOduncKitapIDliste.Text = Convert.ToString(dataGridView1.CurrentRow.Cells[0].Value);
+                        ADDODUNC.Guncel_Kitap_Sayisi = Convert.ToInt32(dataGridView1.CurrentRow.Cells[4].Value) - 1;
+                        bunifuTransition1.ShowSync(ADDODUNC);
+                    }
+                    
+                ///  Ödünç işlermleri için ayrıntıların raporu
 
-        }
+
+                ///  Satis işlermleri için ayrıntıların raporu
+
+
+             }
+
+         }
 
         private void OduncSayisi_Paint(object sender, PaintEventArgs e)
         {
