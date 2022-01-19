@@ -1,0 +1,4 @@
+CREATE PROCEDURE P_DELETSATIS
+	@satisID int
+AS
+	DELETE FROM dbo.kitapSatisi WHERE satisID = @satisID;
