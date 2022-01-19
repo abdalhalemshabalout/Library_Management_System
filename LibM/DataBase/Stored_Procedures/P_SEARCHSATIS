@@ -1,0 +1,9 @@
+CREATE PROCEDURE P_SEARCHSATIS
+	@Search varchar(50)
+AS
+	SELECT * FROM dbo.kitapSatisi WHERE
+	satisID LIKE'%'+@Search+'%'	OR
+	uyeler_uyeID LIKE'%'+@Search+'%' OR
+	ogrenci_ogrenciID LIKE'%'+@Search+'%' OR
+	kitaplar_kitapID LIKE'%'+@Search+'%' OR
+	satisTarihi LIKE'%'+@Search+'%';
