@@ -1,0 +1,8 @@
+CREATE PROCEDURE P_EDITSATIS
+	@ogrenciID	INT,
+	@satisTarihi	DATETIME,
+	@satisID	INT
+
+AS
+	UPDATE dbo.kitapSatisi  SET   ogrenci_ogrenciID =@ogrenciID ,satisTarihi =@satisTarihi
+	WHERE satisID = @satisID;
