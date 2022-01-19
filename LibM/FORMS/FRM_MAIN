@@ -550,6 +550,19 @@ namespace thebook.PL
 
                     bunifuTransition1.ShowSync(ADDKITAP);
                 }
+                /// Update SATIŞLAR
+                if (State == "SATIS")
+                {
+                    PL.FRM_SATIS ADDSATIS = new FRM_SATIS();
+                    ADDSATIS.Aktif_Kullanci_ID = Aktif_Kullanci_ID;
+                    ADDSATIS.txtKitapIDliste.Enabled = false;
+                    ADDSATIS.btnSatis.ButtonText = "Düzeltme";
+                    ADDSATIS.ID = Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value);
+                    ADDSATIS.txtOgrenciIDListe.Text = Convert.ToString(dataGridView1.CurrentRow.Cells[2].Value).Trim();
+                    ADDSATIS.txtKitapIDliste.Text = Convert.ToString(dataGridView1.CurrentRow.Cells[3].Value).Trim();
+                    ADDSATIS.txtSatisTarih.Text = Convert.ToString(dataGridView1.CurrentRow.Cells[4].Value).Trim();
+                    bunifuTransition1.ShowSync(ADDSATIS);
+                }
                 
                 /// Update ÖDÜNÇLER
                 if (State == "ODUNC")
