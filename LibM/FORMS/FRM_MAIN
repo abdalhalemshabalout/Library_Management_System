@@ -849,7 +849,39 @@ namespace thebook.PL
                     }
                     
                 ///  Ödünç işlermleri için ayrıntıların raporu
+                if (State == "ODUNC")
+                {       // ödünç raporu elde etmek için
+                    PL.FRM_AYRINTILAR AYRINTI = new FRM_AYRINTILAR();
+                    BL.CLC_ODUNC odunc = new BL.CLC_ODUNC();
+                    DataTable dt = new DataTable();
+                    string st;
+                    DateTime tarih;
+                    AYRINTI.baslik.Text = "Ödünç Raporu";
+                    int ogrenciID = Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value);
+                    int kullanciID = Convert.ToInt32(dataGridView1.CurrentRow.Cells[1].Value);
+                    int kitapID = Convert.ToInt32(dataGridView1.CurrentRow.Cells[2].Value);
 
+                    dt = odunc.AyrintiGetir(ogrenciID, kullanciID, kitapID);
+
+                    AYRINTI.ogrenciAdi.Text = Convert.ToString(dt.Rows[0]["ogrenciAdi"]) + " " + Convert.ToString(dt.Rows[0]["ogrenciSoyad"]);
+                    AYRINTI.KitapAdi.Text = Convert.ToString(dt.Rows[0]["kitapAdi"]);
+                    AYRINTI.kullanciAdi.Text = Convert.ToString(dt.Rows[0]["uyeAdi"]) + " " + Convert.ToString(dt.Rows[0]["uyeSoyad"]);
+                    AYRINTI.ogrenciBolum.Text = Convert.ToString(dt.Rows[0]["bolum"]);
+
+                    AYRINTI.ogrenciId.Text = Convert.ToString(ogrenciID);
+                    AYRINTI.kullanciId.Text = Convert.ToString(kullanciID);
+                    AYRINTI.KitapId.Text = Convert.ToString(kitapID);
+
+                    tarih = Convert.ToDateTime(dataGridView1.CurrentRow.Cells[3].Value);
+                    st = tarih.Day + "." + tarih.Month + "." + tarih.Year;
+                    AYRINTI.baslamaTarih.Text = st;
+
+                    AYRINTI.bitisTarih_satisID.Text = "Bitiş Tarihi";
+                    tarih = Convert.ToDateTime(dataGridView1.CurrentRow.Cells[4].Value);
+                    st = tarih.Day + "." + tarih.Month + "." + tarih.Year;
+                    AYRINTI.bitisTarih.Text = st;
+                    bunifuTransition1.ShowSync(AYRINTI);
+                }
 
                 ///  Satis işlermleri için ayrıntıların raporu
 
