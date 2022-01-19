@@ -34,7 +34,10 @@ namespace thebook.PL
        
        // Kitap
         BL.CLC_KITAP BLKITAP = new BL.CLC_KITAP();
-
+        
+        //Odunc Kitap
+        BL.CLC_ODUNC BLODUNC = new BL.CLC_ODUNC();
+        
         public FRM_MAIN()
         {
             InitializeComponent();
