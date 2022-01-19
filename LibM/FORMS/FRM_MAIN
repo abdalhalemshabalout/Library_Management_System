@@ -34,7 +34,8 @@ namespace thebook.PL
        
        // Kitap
         BL.CLC_KITAP BLKITAP = new BL.CLC_KITAP();
-        
+        //KİTAP SATIŞ
+        BL.CLC_SATIS BLSATIS = new BL.CLC_SATIS();
         //Odunc Kitap
         BL.CLC_ODUNC BLODUNC = new BL.CLC_ODUNC();
         
