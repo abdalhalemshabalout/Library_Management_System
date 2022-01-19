@@ -164,7 +164,38 @@ namespace thebook.PL
         //ODUNC  FOR MAİN BAR
         private void button14_Click(object sender, EventArgs e)
         {
+            setcolor(); // color change
+            button14.BackColor = Color.FromArgb(00, 00, 28);
+            Button_Visible_false();
+            P_HOME.Visible = false;
+            P_MAIN.Visible = true;
+           
+            bunifuThinButton24.Visible = true;
+            btnSatisIslemi.Visible = true;
+            bunifuThinButton22.Visible = true;
+            
+                
+            bunifuThinButton24.ButtonText = "Ayrıntılar";
+            btnSatisIslemi.ButtonText = "Iade Etmek";
+            State = "ODUNC";
+            Lb_Title.Text = "Ödünç";
 
+            // Load Data
+            try
+            {
+                DataTable dt = new DataTable();
+                dt = BLODUNC.load();
+                dataGridView1.DataSource = dt;
+                dataGridView1.Columns[0].HeaderText = "Öğrenci NO";
+                dataGridView1.Columns[1].HeaderText = "Kullancı ID";
+                dataGridView1.Columns[2].HeaderText = "Kitap ID";
+                dataGridView1.Columns[3].HeaderText = "Başlama Tarihi";
+                dataGridView1.Columns[4].HeaderText = "Bitiş Tarihi";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         //SATIŞ  FOR MAİN BAR
@@ -491,6 +522,21 @@ namespace thebook.PL
                     bunifuTransition1.ShowSync(ADDKITAP);
                 }
                 
+                /// Update ÖDÜNÇLER
+                if (State == "ODUNC")
+                {
+                    PL.FRM_ADDODUNC ADDODUNC = new FRM_ADDODUNC();
+                    ADDODUNC.ID = Aktif_Kullanci_ID;
+                    ADDODUNC.Aktif_Kullanci_ID = Aktif_Kullanci_ID;
+                    ADDODUNC.txtOduncKitapIDliste.Enabled = false;
+                    ADDODUNC.txtOduncOgrenciIDListe.Enabled = false;
+                    ADDODUNC.btnOdunc.ButtonText = "Düzeltme";
+                    ADDODUNC.txtOduncOgrenciIDListe.Text = Convert.ToString(dataGridView1.CurrentRow.Cells[0].Value).Trim();
+                    ADDODUNC.txtOduncKitapIDliste.Text = Convert.ToString(dataGridView1.CurrentRow.Cells[2].Value).Trim();
+                    ADDODUNC.txtOdunBaslaTarih.Text = Convert.ToString(dataGridView1.CurrentRow.Cells[3].Value).Trim();
+                    ADDODUNC.txtOdunBitisTarih.Text = Convert.ToString(dataGridView1.CurrentRow.Cells[4].Value).Trim();
+                    bunifuTransition1.ShowSync(ADDODUNC);
+                }
             }
              
 
@@ -617,6 +663,15 @@ namespace thebook.PL
                         Ferror.Lb_Title.Text = "!!!  UYARI !!!  \n SİLMEK İSTEDİĞNİZ KITAP \n DAHA ÖNCE SATIŞ VEYA ÖDÜNÇ İŞLEMLERİ YAPILDI !! ";
                         Ferror.Show();
                     }
+               }
+               
+               /// DELETE ÖDÜNÇ
+                if (State == "ODUNC")
+                {
+                    BLODUNC.Delete(Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value), Convert.ToInt32(dataGridView1.CurrentRow.Cells[2].Value));
+                    PL.FRM_DDELETE Fdelete = new FRM_DDELETE();
+                    Fdelete.Show();
+                }
             }
         }
 
@@ -678,7 +733,14 @@ namespace thebook.PL
                 this.Kitap_satir_Renklendirme();
 
             }
-            
+            /// Search ödünç işlemi
+            if (State == "ODUNC")
+            {
+                DataTable dt = new DataTable();
+                dt = BLODUNC.Search(bunifuMaterialTextbox1.Text);
+                dataGridView1.DataSource = dt;
+                this.Odunc_satir_Renklendirme();
+            }
         }
 
         //YAZARLAR  FOR MAİN BAR
