@@ -1,0 +1,10 @@
+CREATE PROCEDURE P_EDITODUNC
+	@ogrenciID	INT,
+	@kitapID	INT,
+	@kullanciID	INT,
+	@baslamaTarihi DATETIME,
+	@bitisTarihi DATETIME
+
+AS
+	UPDATE dbo.kitapOdunc  SET  baslamaTarihi =@baslamaTarihi, bitisTarihi =@bitisTarihi
+	WHERE ogrenci_ogrenciID = @ogrenciID AND kitaplar_kitapID=@kitapID ;
