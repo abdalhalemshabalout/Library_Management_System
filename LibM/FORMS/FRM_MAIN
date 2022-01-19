@@ -707,6 +707,14 @@ namespace thebook.PL
                     }
                }
                
+               /// DELETE SATIŞ
+                if (State == "SATIS")
+                {
+                    BLSATIS.Delete(Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value));
+                    PL.FRM_DDELETE Fdelete = new FRM_DDELETE();
+                    Fdelete.Show();
+                }
+               
                /// DELETE ÖDÜNÇ
                 if (State == "ODUNC")
                 {
