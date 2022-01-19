@@ -1,0 +1,9 @@
+CREATE PROCEDURE P_ADDSATIS
+	@uyeID INT,
+	@ogrenciID INT,
+	@kitapID INT ,
+	@satisTarihi DATETIME
+AS
+	INSERT INTO dbo.kitapSatisi (uyeler_uyeID ,ogrenci_ogrenciID ,kitaplar_kitapID , satisTarihi)
+	VALUES
+	(@uyeID,@ogrenciID,@kitapID,@satisTarihi);
