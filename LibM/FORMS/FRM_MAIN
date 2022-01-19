@@ -906,7 +906,42 @@ namespace thebook.PL
                         ADDODUNC.Guncel_Kitap_Sayisi = Convert.ToInt32(dataGridView1.CurrentRow.Cells[4].Value) - 1;
                         bunifuTransition1.ShowSync(ADDODUNC);
                     }
-                    
+                 if (State == "SATIS")
+                {       // satış raporu elde etmek için
+                    PL.FRM_AYRINTILAR AYRINTI = new FRM_AYRINTILAR();
+                    BL.CLC_SATIS satis = new BL.CLC_SATIS();
+                    DataTable dt = new DataTable();
+                    string st;
+                    DateTime tarih;
+                    AYRINTI.baslik.Text = "Satış Raporu";
+
+                    int satis_ID = Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value);
+
+                    dt = satis.AyrintiGetir(satis_ID);
+
+                    AYRINTI.ogrenciAdi.Text = Convert.ToString(dt.Rows[0]["ogrenciAdi"]) + " " + Convert.ToString(dt.Rows[0]["ogrenciSoyad"]);
+                    AYRINTI.KitapAdi.Text = Convert.ToString(dt.Rows[0]["kitapAdi"]);
+                    AYRINTI.kullanciAdi.Text = Convert.ToString(dt.Rows[0]["uyeAdi"]) + " " + Convert.ToString(dt.Rows[0]["uyeSoyad"]);
+
+                    AYRINTI.ogrenciId.Text = Convert.ToString(dt.Rows[0]["ogrenci_ogrenciID"]);
+                    AYRINTI.kullanciId.Text = Convert.ToString(dt.Rows[0]["uyeler_uyeID"]);
+                    AYRINTI.KitapId.Text = Convert.ToString(dt.Rows[0]["kitaplar_kitapID"]);
+
+                    AYRINTI.baslaTarih_SatisTarih.Text = "Satış Tarihi";
+                    tarih = Convert.ToDateTime(dt.Rows[0]["satisTarihi"]);
+                    st = tarih.Day + "." + tarih.Month + "." + tarih.Year;
+                    AYRINTI.baslamaTarih.Text = st;
+
+                    AYRINTI.bitisTarih_satisID.Text = "Satış ID";
+                    AYRINTI.bitisTarih.Text = Convert.ToString(dt.Rows[0]["satisID"]);
+                    bunifuTransition1.ShowSync(AYRINTI);
+
+                    AYRINTI.txt_kitap_Fiyat.Visible = true;
+                    AYRINTI.kitap_Fiyat.Visible = true;
+
+                    AYRINTI.kitap_Fiyat.Text = Convert.ToString(dt.Rows[0]["kirapFiyati"]);
+                }
+                
                 ///  Ödünç işlermleri için ayrıntıların raporu
                 if (State == "ODUNC")
                 {       // ödünç raporu elde etmek için
