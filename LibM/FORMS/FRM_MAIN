@@ -202,7 +202,35 @@ namespace thebook.PL
         //SATIŞ  FOR MAİN BAR
         private void button15_Click(object sender, EventArgs e)
         {
-           
+           {
+            setcolor(); // color change
+            button15.BackColor = Color.FromArgb(00, 00, 28);
+            Button_Visible_false();
+            P_HOME.Visible = false;
+            P_MAIN.Visible = true;
+            bunifuThinButton24.Visible = true;
+            btnSatisIslemi.Visible = true;
+            bunifuThinButton22.Visible = true;
+            bunifuThinButton24.ButtonText = "Ayrıntılar";
+            btnSatisIslemi.ButtonText = "Iade Etmek";
+            State = "SATIS";
+            Lb_Title.Text = "Satışlar";
+            // Load Data
+            try
+            {
+                DataTable dt = new DataTable();
+                dt = BLSATIS.load();
+                dataGridView1.DataSource = dt;
+                dataGridView1.Columns[0].HeaderText = "Satış ID";
+                dataGridView1.Columns[1].HeaderText = "Kullancı ID";
+                dataGridView1.Columns[2].HeaderText = "Öğrenci NO";
+                dataGridView1.Columns[3].HeaderText = "Kitap ID";
+                dataGridView1.Columns[4].HeaderText = "Satış Tarihi";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
         }
 
