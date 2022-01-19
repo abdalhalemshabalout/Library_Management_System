@@ -1,0 +1,9 @@
+CREATE PROCEDURE P_SEARCHODUNC
+	@Search varchar(50)
+AS
+	SELECT * FROM dbo.kitapOdunc WHERE
+	ogrenci_ogrenciID LIKE'%'+@Search+'%'	OR
+	uyeler_uyeID LIKE'%'+@Search+'%' OR
+	kitaplar_kitapID LIKE'%'+@Search+'%' OR
+	baslamaTarihi LIKE'%'+@Search+'%' OR
+	bitisTarihi LIKE'%'+@Search+'%' ;
