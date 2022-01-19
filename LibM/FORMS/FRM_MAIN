@@ -783,6 +783,15 @@ namespace thebook.PL
                 this.Kitap_satir_Renklendirme();
 
             }
+            /// Search Satış işlemi
+            if (State == "SATIS")
+            {
+                DataTable dt = new DataTable();
+                dt = BLSATIS.Search(bunifuMaterialTextbox1.Text);
+                dataGridView1.DataSource = dt;
+
+            }
+            
             /// Search ödünç işlemi
             if (State == "ODUNC")
             {
