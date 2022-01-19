@@ -1,0 +1,5 @@
+CREATE PROCEDURE P_DELETODUNC
+	@ogrenciID INT,
+	@kitapID INT
+AS
+	DELETE FROM dbo.kitapOdunc WHERE ogrenci_ogrenciID = @ogrenciID AND kitaplar_kitapID=@kitapID;
