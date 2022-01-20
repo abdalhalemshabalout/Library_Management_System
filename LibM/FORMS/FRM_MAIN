@@ -1191,7 +1191,18 @@ namespace thebook.PL
 
         private void dataGridView1_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-
+            if (State == "BOOK")
+            {
+                this.Kitap_satir_Renklendirme();
+            }
+            if (State == "ODUNC")
+            {
+                this.Odunc_satir_Renklendirme();
+            }
+            if (State == "STUDENT")
+            {
+                this.Ogrenci_Satir_Renklendirme();
+            }
         }
 
         private void panel3_Paint(object sender, PaintEventArgs e)
