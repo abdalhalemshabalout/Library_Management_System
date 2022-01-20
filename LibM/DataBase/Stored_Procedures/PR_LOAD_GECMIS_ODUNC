@@ -1,0 +1,5 @@
+CREATE PROCEDURE PR_LOAD_GECMIS_ODUNC
+
+AS
+
+	SELECT * FROM dbo.Gecmis_kitap_Odunc;
