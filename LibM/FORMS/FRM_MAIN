@@ -1150,7 +1150,10 @@ namespace thebook.PL
 
         private void OduncSayisi_DoubleClick(object sender, EventArgs e)
         {
-            
+            if (this.Aktif_Kullanci_Yetkisi != "Öğrenci")
+            {
+                button14_Click(sender, e);
+            }
         }
 
         private void panel2_DoubleClick(object sender, EventArgs e)
