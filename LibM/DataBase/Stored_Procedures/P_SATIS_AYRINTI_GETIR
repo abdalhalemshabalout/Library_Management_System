@@ -1,0 +1,21 @@
+CREATE PROCEDURE P_SATIS_AYRINTI_GETIR
+	@satis_ID INT
+AS
+	SELECT
+	s.satisID,
+	s.ogrenci_ogrenciID,
+	o.ogrenciAdi,
+	o.ogrenciSoyad,
+	s.uyeler_uyeID,
+	u.uyeAdi,
+	u.uyeSoyad,
+	s.kitaplar_kitapID,
+	k.kitapAdi,
+	s.satisTarihi,
+	k.kirapFiyati
+	FROM dbo.kitapSatisi AS s INNER JOIN dbo.ogrenci as o
+	ON s.ogrenci_ogrenciID =o.ogrenciID
+	INNER JOIN dbo.kitaplar AS K ON s.kitaplar_kitapID =k.kitapID
+	INNER JOIN dbo.uyeler AS U ON s.uyeler_uyeID =u.uyeID
+
+	WHERE s.satisID=@satis_ID;
