@@ -1,0 +1,6 @@
+CREATE PROCEDURE P_KITAP_SAYISI_GUNCELLEME
+	@kitapID int ,
+	@adet INT
+	
+AS
+	UPDATE dbo.kitaplar  SET adet=@adet	WHERE kitapID = @kitapID;
