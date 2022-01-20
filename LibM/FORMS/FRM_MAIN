@@ -1117,7 +1117,31 @@ namespace thebook.PL
         //GEÇMİŞ ÖDÜNÇ  FOR MAİN BAR
         private void button10_Click(object sender, EventArgs e)
         {
-          
+          setcolor(); // color change
+            button10.BackColor = Color.FromArgb(00, 00, 28);
+            Lb_Title.Text = "Geçmiş Ödünç";
+            Button_Visible_false();
+            P_HOME.Visible = false;
+            P_MAIN.Visible = true;
+
+            // Load Data
+            try
+            {
+                DataTable dt = new DataTable();
+                dt = BLODUNC.load_Gecmis_Odunc();
+                dataGridView1.DataSource = dt;
+                dataGridView1.Columns[0].HeaderText = "ID";
+                dataGridView1.Columns[1].HeaderText = "Iade Etme Tarihi";
+                dataGridView1.Columns[2].HeaderText = "Öğrenci NO";
+                dataGridView1.Columns[3].HeaderText = "Kullancı ID";
+                dataGridView1.Columns[4].HeaderText = "Kitap ID";
+                dataGridView1.Columns[5].HeaderText = "Başlama Tarihi";
+                dataGridView1.Columns[6].HeaderText = "Bitiş Tarihi";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         // işlemlerin Button  (ekleme - silme - düzeltme - satış - ödünç - ayrıntıları)
