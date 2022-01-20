@@ -160,7 +160,7 @@ namespace thebook.PL
             {
                 MessageBox.Show(ex.Message);
             }
-              kitap_satir_Renklendirme; ///-----------Kitaplar kontrolu - renklendirme 
+              kitap_satir_Renklendirme(); ///-----------Kitaplar kontrolu - renklendirme 
             
             }
             ///------kitaplar kontrolu - renklendirme--
@@ -217,8 +217,27 @@ namespace thebook.PL
             {
                 MessageBox.Show(ex.Message);
             }
+            odunc_satir_Renklendirme();  ///------Odunc islmleri kontrolu - renklendirme
         }
-
+        ///------Ödünç işlemleri kontrolu - renklendirme--
+        public void Odunc_satir_Renklendirme()
+        {
+            ///--------
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                DateTime bitisTarih = Convert.ToDateTime(Convert.ToString(row.Cells[4].Value).Trim());
+                if (DateTime.Now > bitisTarih)
+                {
+                    row.DefaultCellStyle.BackColor = Color.Red;
+                    row.DefaultCellStyle.ForeColor = Color.White;
+                }
+                else
+                {
+                    row.DefaultCellStyle.BackColor = Color.White;
+                    row.DefaultCellStyle.ForeColor = Color.Black;
+                }
+            }
+        }
         //SATIŞ  FOR MAİN BAR
         private void button15_Click(object sender, EventArgs e)
         {
