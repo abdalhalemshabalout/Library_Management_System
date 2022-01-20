@@ -1,0 +1,4 @@
+CREATE PROCEDURE P_KITAP_SAYISI_GETIR
+	@kitapID INT
+AS
+	SELECT adet FROM dbo.kitaplar WHERE kitapID=@kitapID;
