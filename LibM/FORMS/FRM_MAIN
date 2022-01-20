@@ -340,6 +340,30 @@ namespace thebook.PL
             }
             Ogrenci_Satir_Renklendirme();
         }
+        /// 
+        ///------Öğrenciler kontrolu - renklendirme--
+        public void Ogrenci_Satir_Renklendirme()
+        {
+            BL.CLC_ODUNC BLODUNC = new BL.CLC_ODUNC();
+
+            
+                ///--------
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    int Alinan_Kitap_Sayisi = BLODUNC.Odubc_Kitap_sayisi(Convert.ToInt32(Convert.ToInt32(row.Cells[0].Value))).Rows.Count;
+                    if (Alinan_Kitap_Sayisi == 5)
+                    {
+                        row.DefaultCellStyle.BackColor = Color.Red;
+                        row.DefaultCellStyle.ForeColor = Color.White;
+                    }
+                    else
+                    {
+                        row.DefaultCellStyle.BackColor = Color.White;
+                        row.DefaultCellStyle.ForeColor = Color.Black;
+                    }
+                }
+            
+        }
             
         }
         //KULLANICILAR  FOR MAİN BAR
