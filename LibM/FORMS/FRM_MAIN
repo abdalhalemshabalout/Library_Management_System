@@ -939,7 +939,88 @@ namespace thebook.PL
         //SATIŞ YAP
         private void btnSatisIslemi_Click(object sender, EventArgs e)
         {
-            
+            PL.FRM_ERRORINSERT ror = new FRM_ERRORINSERT();
+            if (dataGridView1.Rows.Count == 0)
+            {
+                MessageBox.Show("Bu işlemi gerçekleştirmek için Listede Kayıt bulunmamaktadır");
+            }
+            else
+            {
+                if (State == "BOOK")
+                {
+                    if (Convert.ToInt32(dataGridView1.CurrentRow.Cells[3].Value) == 0)
+                    {
+
+                        ror.Lb_Title.Text = "!!!UYARI !!! \n BU KITAP ÜZERİNDE SATIN İŞLEMİ YAPILMAZ \n , SADECE ÖDÜNÇ İŞLEMİ YAPILABİLİR ";
+                        ror.Show();
+                    }
+                    else if (Convert.ToInt32(dataGridView1.CurrentRow.Cells[4].Value) == 0)
+                    {
+                        ror.Lb_Title.Text = "!!!UYARI !!! \n İSTEDİĞİNİZ KİTAP ŞUANDA \n KÜTÜPHANEDE YETERLİ SAYIDA BULUNMAMAKTADIR ";
+                        ror.Show();
+                    }
+                    else
+                    {
+                        PL.FRM_SATIS ADDFSATIS = new FRM_SATIS();
+                        ADDFSATIS.Aktif_Kullanci_ID = this.Aktif_Kullanci_ID;
+                        ADDFSATIS.btnSatis.ButtonText = "Satış Yap";
+                        ADDFSATIS.txtKitapIDliste.Enabled = false;
+                        ADDFSATIS.txtKitapIDliste.Text = Convert.ToString(dataGridView1.CurrentRow.Cells[0].Value);
+                        ADDFSATIS.Guncel_Kitap_Sayisi = Convert.ToInt32(dataGridView1.CurrentRow.Cells[4].Value) - 1;
+                        bunifuTransition1.ShowSync(ADDFSATIS);
+                    }
+
+                }
+                if (State == "ODUNC")
+                {
+                    if (dataGridView1.Rows.Count == 0)
+                    {
+                        MessageBox.Show("İade etme durumda kitap bulunmamaktadır");
+
+                    }
+                    else
+                    {
+                        PL.FRM_DDELETE DELETE_OD = new FRM_DDELETE();
+                        int sayi_Kitap = BLKITAP.KITAP_SAYISI_GETIR(Convert.ToInt32(dataGridView1.CurrentRow.Cells[2].Value));
+                        int kitap_ID = Convert.ToInt32(dataGridView1.CurrentRow.Cells[2].Value);
+                        BLODUNC.Delete(Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value), Convert.ToInt32(dataGridView1.CurrentRow.Cells[2].Value));
+
+                        ///  Insert_Gecmis_Odunc
+                        BLODUNC.Insert_Gecmis_Odunc(Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value), Convert.ToInt32(dataGridView1.CurrentRow.Cells[1].Value),
+                            Convert.ToInt32(dataGridView1.CurrentRow.Cells[2].Value), Convert.ToDateTime(dataGridView1.CurrentRow.Cells[3].Value),
+                            Convert.ToDateTime(dataGridView1.CurrentRow.Cells[4].Value), DateTime.Now);
+
+                        /// Kitap sayisi güncelleme
+                        BLKITAP.Kitap_Sayisi_Guncelleme(kitap_ID, ++sayi_Kitap);
+                        DELETE_OD.Lb_Title.Text = "İADE İŞLEMİ BAŞARIYLA TAMAMLANDI";
+                        DELETE_OD.Show();
+                    }
+
+
+                }
+
+                if (State == "SATIS")
+                {
+
+                    PL.FRM_DDELETE DELETE_OD = new FRM_DDELETE();
+                    if (dataGridView1.Rows.Count == 0)
+                    {
+                        MessageBox.Show("İade etme durumda kitap bulunmamaktadır");
+
+                    }
+                    else
+                    {
+                        int sayi_Kitap = BLKITAP.KITAP_SAYISI_GETIR(Convert.ToInt32(dataGridView1.CurrentRow.Cells[3].Value));
+                        int kitap_ID = Convert.ToInt32(dataGridView1.CurrentRow.Cells[3].Value);
+                        BLSATIS.Delete(Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value));
+                        BLKITAP.Kitap_Sayisi_Guncelleme(kitap_ID, ++sayi_Kitap);
+                        DELETE_OD.Lb_Title.Text = "İADE İŞLEMİ BAŞARIYLA TAMAMLANDI";
+                        DELETE_OD.Show();
+                    }
+
+
+                }
+            }
         }
 
         //AYRINTILAR
