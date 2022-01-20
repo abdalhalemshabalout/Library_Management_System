@@ -1,0 +1,11 @@
+CREATE PROCEDURE P_ODUNC_AYRINTI_GETIR
+	@ogrenciID INT,
+	@kitapID INT,
+	@kullanciID INT
+AS
+	SELECT o.ogrenciAdi,o.ogrenciSoyad,u.uyeAdi,u.uyeSoyad,k.kitapAdi,o.bolum FROM dbo.kitapOdunc AS kd INNER JOIN dbo.ogrenci as o
+	ON kd.ogrenci_ogrenciID =o.ogrenciID
+	INNER JOIN dbo.kitaplar AS K ON kd.kitaplar_kitapID =k.kitapID
+	INNER JOIN dbo.uyeler AS U ON kd.uyeler_uyeID =u.uyeID
+
+	WHERE kd.ogrenci_ogrenciID=@ogrenciID AND kd.kitaplar_kitapID =@kitapID AND kd.uyeler_uyeID =@kullanciID;
