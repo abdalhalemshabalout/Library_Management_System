@@ -18,24 +18,28 @@ namespace thebook.PL
         int ID;
         public int Aktif_Kullanci_ID;
         public String Aktif_Kullanci_Yetkisi;
-        //kullancılar 
-        BL.CLC_USER BLUSER = new BL.CLC_USER();
+    
         //kategori
         BL.CLC_CAT BLCAT = new BL.CLC_CAT();
         
-        //yazar 
-        BL.CLC_YAZAR BLYAZAR = new BL.CLC_YAZAR()
-        
+        //kullancılar 
+        BL.CLC_USER BLUSER = new BL.CLC_USER();
+
         //Ogrenci 
         BL.CLC_OGRENCI BLOGRENCI = new BL.CLC_OGRENCI();
         
+        //yazar 
+        BL.CLC_YAZAR BLYAZAR = new BL.CLC_YAZAR()
+              
         //yayın evler
          BL.CLC_YAYINEV BLYAYINEV = new BL.CLC_YAYINEV();
        
        // Kitap
         BL.CLC_KITAP BLKITAP = new BL.CLC_KITAP();
+        
         //KİTAP SATIŞ
         BL.CLC_SATIS BLSATIS = new BL.CLC_SATIS();
+        
         //Odunc Kitap
         BL.CLC_ODUNC BLODUNC = new BL.CLC_ODUNC();
         
@@ -53,9 +57,6 @@ namespace thebook.PL
 
            
         }
-
-       
-     
 
         private void label1_Click(object sender, EventArgs e)
         {
