@@ -160,9 +160,28 @@ namespace thebook.PL
             {
                 MessageBox.Show(ex.Message);
             }
-
-        }
-
+              kitap_satir_Renklendirme; ///-----------Kitaplar kontrolu - renklendirme 
+            
+            }
+            ///------kitaplar kontrolu - renklendirme--
+            public void Kitap_satir_Renklendirme()
+            {
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    int adet = Convert.ToInt32(row.Cells[4].Value);
+                    int fiyat = Convert.ToInt32(row.Cells[3].Value);
+                    if (adet == 0)
+                    {
+                        row.DefaultCellStyle.BackColor = Color.Red;
+                        row.DefaultCellStyle.ForeColor = Color.White;
+                    }
+                    if (fiyat == 0 && adet!=0)
+                    {
+                        row.DefaultCellStyle.BackColor = Color.YellowGreen;
+                        row.DefaultCellStyle.ForeColor = Color.Black;
+                    }
+                }            
+            }
         //ODUNC  FOR MAİN BAR
         private void button14_Click(object sender, EventArgs e)
         {
