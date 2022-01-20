@@ -55,7 +55,21 @@ namespace thebook.PL
             P_MAIN.Visible = false;
             Lb_Title.Text = "Ana Sayfa";
 
-           
+            txtIDshow.Text = Convert.ToString(Aktif_Kullanci_ID);
+            txtYetkishow.Text = Convert.ToString(Aktif_Kullanci_Yetkisi);
+
+            /// çalışan ve yönetici yetkileri
+            if (txtYetkishow.Text.Trim() == "Çalışan")
+            {
+                button13.Enabled = false;
+                button7.Enabled = false;
+                button10.Enabled = false;
+            }
+            else
+            {
+                button13.Enabled = true;
+                button7.Enabled = true;
+            }
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -94,15 +108,25 @@ namespace thebook.PL
                 this.WindowState = FormWindowState.Normal;
             }
         }
+        
         //KÜÇÜLTE FOR TİTLE BAR
         private void bunifuImageButton1_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
         }
+        
         //ANASAYFA FOR MAİN BAR
         private void button1_Click(object sender, EventArgs e)
         {
-
+            
+            setcolor(); // color change
+            button1.BackColor = Color.FromArgb(00, 00, 28);
+            P_HOME.Visible = true;
+            P_MAIN.Visible = false;
+            Lb_Title.Text = "Ana Sayfa";
+            DataTable dt = new DataTable();
+            dt = BLCAT.load();
+            txtKategoriSayisi.Text = Convert.ToString(dt.Rows.Count);
         }
 
         private void P_HOME_Paint(object sender, PaintEventArgs e)
@@ -402,31 +426,47 @@ namespace thebook.PL
         //KATEGORİ EKLEME FOR HOME
         private void button3_Click(object sender, EventArgs e)
         {
-           
+           PL.FRM_ADDCAT ADDFCAT = new FRM_ADDCAT();
+            ADDFCAT.btnadd.ButtonText = "Ekleme";
+            ADDFCAT.ID = 0;
+            bunifuTransition1.ShowSync(ADDFCAT);
         }
 
         //KİTAP EKLEME FOR HOME
         private void button2_Click(object sender, EventArgs e)
-        {
-            
+        {     
+            PL.FRM_ADDKITAP ADDFKITAP = new FRM_ADDKITAP();
+            ADDFKITAP.btnKitap.ButtonText = "Ekleme";
+            ADDFKITAP.ID = 0;
+            bunifuTransition1.ShowSync(ADDFKITAP);
         }
 
         //YAZAR EKLEME FOR HOME
         private void button4_Click(object sender, EventArgs e)
         {
-          
+            PL.FRM_ADDYAZAR ADDYAZAR = new FRM_ADDYAZAR();
+            ADDYAZAR.btnYazar.ButtonText = "Ekleme";
+            ADDYAZAR.ID = 0;
+            bunifuTransition1.ShowSync(ADDYAZAR);
         }
 
         //YAYIN EV EKLEME FOR HOME
         private void button5_Click(object sender, EventArgs e)
         {
            
+            PL.FRM_ADDYAYINEV ADDYAYINEV = new FRM_ADDYAYINEV();
+            ADDYAYINEV.btnYayinEv.ButtonText = "Ekleme";
+            ADDYAYINEV.ID = 0;
+            bunifuTransition1.ShowSync(ADDYAYINEV);
         }
 
         //ÖĞRENCİ EKLEME FOR HOME
         private void button6_Click(object sender, EventArgs e)
         {
-
+            PL.FRM_ADDOGRENCI ADDFOGRENCI = new FRM_ADDOGRENCI();
+            ADDFOGRENCI.btnOgrenci.ButtonText = "Ekleme";
+            ADDFOGRENCI.ID = 0;
+            bunifuTransition1.ShowSync(ADDFOGRENCI);
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -506,7 +546,198 @@ namespace thebook.PL
 
         private void FRM_MAIN_Activated(object sender, EventArgs e)
         {
-           
+           /// Ana sayfada Bulunan bilgilerin gostermesi
+            DataTable dt2 = new DataTable();
+            dt2 = BLCAT.load();
+            txtKategoriSayisi.Text = Convert.ToString(dt2.Rows.Count);
+            dt2 = BLOGRENCI.load();
+            OgrenciSayisi.Text = Convert.ToString(dt2.Rows.Count);
+            dt2 = BLUSER.load();
+            txtKullanciSayisi.Text= Convert.ToString(dt2.Rows.Count);
+            dt2 = BLKITAP.load();
+            kitapSayisi.Text = Convert.ToString(dt2.Rows.Count);
+            dt2 = BLYAYINEV.load();
+            YayinEvSayisi.Text= Convert.ToString(dt2.Rows.Count);
+            dt2 = BLYAZAR.load();
+            YazarSayısı.Text = Convert.ToString(dt2.Rows.Count);
+            dt2 = BLSATIS.load();
+            txtSatisSayisi.Text = Convert.ToString(dt2.Rows.Count);
+            dt2 = BLODUNC.load();
+            txtOduncSayisi.Text = Convert.ToString(dt2.Rows.Count);
+
+
+          
+            if (State == "CAT")
+            {
+                // Load Data kategori  otomatik olarak yenileme
+                try
+                {
+                    DataTable dt = new DataTable();
+                    dt = BLCAT.load();
+                    dataGridView1.DataSource = dt;
+                    dataGridView1.Columns[0].HeaderText = "ID";
+                    dataGridView1.Columns[1].HeaderText = "Adı";
+                    dataGridView1.Columns[2].HeaderText = "Ayrıntıları";
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            if (State == "USER")
+            {
+                // Load Data USER otomatik olarak yenileme
+                try
+                {
+                    DataTable dt = new DataTable();
+                    dt = BLUSER.load();
+                    dataGridView1.DataSource = dt;
+                    dataGridView1.Columns[0].HeaderText = "ID";
+                    dataGridView1.Columns[1].HeaderText = "Ad";
+                    dataGridView1.Columns[2].HeaderText = "Soyad";
+                    dataGridView1.Columns[3].HeaderText = "Email";
+                    dataGridView1.Columns[4].HeaderText = "Tel";
+                    dataGridView1.Columns[5].HeaderText = "Adres";
+                    dataGridView1.Columns[6].HeaderText = "Yetki";
+                    dataGridView1.Columns[7].HeaderText = "Şifre";
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            if (State == "STUDENT")
+            {
+                // Load Data OGRENCI otomatik olarak yenileme
+                try
+                {
+                    DataTable dt = new DataTable();
+                    dt = BLOGRENCI.load();
+                    dataGridView1.DataSource = dt;
+                    dataGridView1.Columns[0].HeaderText = "ID";
+                    dataGridView1.Columns[1].HeaderText = "Ad";
+                    dataGridView1.Columns[2].HeaderText = "Soyad";
+                    dataGridView1.Columns[3].HeaderText = "Bölüm";
+                    dataGridView1.Columns[4].HeaderText = "Tel";
+                    dataGridView1.Columns[5].HeaderText = "Kayit Tarihi";
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                Ogrenci_Satir_Renklendirme();
+
+            }
+            if (State == "YAZAR")
+            {
+                // Load Data yazar otomatik olarak yenileme
+                try
+                {
+                    DataTable dt = new DataTable();
+                    dt = BLYAZAR.load();
+                    dataGridView1.DataSource = dt;
+                    dataGridView1.Columns[0].HeaderText = "ID";
+                    dataGridView1.Columns[1].HeaderText = "Ad";
+                    dataGridView1.Columns[2].HeaderText = "Email";
+                    dataGridView1.Columns[3].HeaderText = "Tel";
+                    dataGridView1.Columns[4].HeaderText = "Adres";
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
+            }
+
+            if (State == "YAYEV")
+            {
+                // Load Data yayin ev otomatik olarak yenileme
+                try
+                {
+                    DataTable dt = new DataTable();
+                    dt = BLYAYINEV.load();
+                    dataGridView1.DataSource = dt;
+                    dataGridView1.Columns[0].HeaderText = "ID";
+                    dataGridView1.Columns[1].HeaderText = "Ad";
+                    dataGridView1.Columns[2].HeaderText = "Adres";
+                    dataGridView1.Columns[3].HeaderText = "Tel";
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
+            }
+
+            if (State == "BOOK")
+            {
+                // Load Data kITAP otomatik olarak yenileme
+                try
+                {
+                    DataTable dt = new DataTable();
+                    dt = BLKITAP.load();
+                    dataGridView1.DataSource = dt;
+                    dataGridView1.Columns[0].HeaderText = "ID";
+                    dataGridView1.Columns[1].HeaderText = "Ad";
+                    dataGridView1.Columns[2].HeaderText = "Yayın Tarihi";
+                    dataGridView1.Columns[3].HeaderText = "Fiyat";
+                    dataGridView1.Columns[4].HeaderText = "Adet";
+                    dataGridView1.Columns[5].HeaderText = "Yayın Ev";
+                    dataGridView1.Columns[6].HeaderText = "Kategori";
+                    dataGridView1.Columns[7].HeaderText = "yazar";
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
+                Kitap_satir_Renklendirme();
+            }
+            if (State == "SATIS")
+            {
+                // Load Data
+                try
+                {
+                    DataTable dt = new DataTable();
+                    dt = BLSATIS.load();
+                    dataGridView1.DataSource = dt;
+                    dataGridView1.Columns[0].HeaderText = "Satış ID";
+                    dataGridView1.Columns[1].HeaderText = "Kullancı ID";
+                    dataGridView1.Columns[2].HeaderText = "Öğrenci ID";
+                    dataGridView1.Columns[3].HeaderText = "Kitap ID";
+                    dataGridView1.Columns[4].HeaderText = "Satış Tarihi";
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+
+            if (State == "ODUNC")
+            {
+                // Load Data
+                try
+                {
+                    DataTable dt = new DataTable();
+                    dt = BLODUNC.load();
+                    dataGridView1.DataSource = dt;
+                    dataGridView1.Columns[0].HeaderText = "Öğrenci ID";
+                    dataGridView1.Columns[1].HeaderText = "Kullancı ID";
+                    dataGridView1.Columns[2].HeaderText = "Kitap ID";
+                    dataGridView1.Columns[3].HeaderText = "Başlama Tarihi";
+                    dataGridView1.Columns[4].HeaderText = "Bitiş Tarihi";
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                Odunc_satir_Renklendirme();
+            }
 
         }
 
