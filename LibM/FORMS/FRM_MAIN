@@ -1412,7 +1412,10 @@ namespace thebook.PL
 
         private void KullanciSayisi_DoubleClick(object sender, EventArgs e)
         {
-          
+          if (this.Aktif_Kullanci_Yetkisi != "Çalışan" && this.Aktif_Kullanci_Yetkisi != "Öğrenci" )
+            {
+                button13_Click_2(sender, e);
+            }
         }
 
         private void panel4_DoubleClick(object sender, EventArgs e)
