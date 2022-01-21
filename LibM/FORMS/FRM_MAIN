@@ -1373,7 +1373,10 @@ namespace thebook.PL
 
         private void panel3_Click(object sender, EventArgs e)
         {
-
+           if (this.Aktif_Kullanci_Yetkisi != "Öğrenci")
+            {
+                button18_Click(sender, e);
+            }
         }
 
         private void panel3_DoubleClick(object sender, EventArgs e)
