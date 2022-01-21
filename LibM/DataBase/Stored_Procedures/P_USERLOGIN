@@ -1,0 +1,5 @@
+CREATE PROCEDURE P_USERLOGIN
+	@uyeID int,
+	@sifre	VARCHAR(50)
+AS
+	select * FROM dbo.uyeler WHERE uyeID = @uyeID AND sifre=@sifre ;
