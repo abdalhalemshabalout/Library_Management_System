@@ -1391,7 +1391,10 @@ namespace thebook.PL
 
         private void panel2_DoubleClick(object sender, EventArgs e)
         {
-            
+            if (this.Aktif_Kullanci_Yetkisi != "Öğrenci")
+            {
+                button17_Click(sender, e);
+            }
         }
 
         private void KategoriSayisi_Paint(object sender, PaintEventArgs e)
