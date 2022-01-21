@@ -91,8 +91,10 @@ namespace thebook.PL
         //ÇIKIŞ YAPMA FOR TİTLE BAR
         private void bunifuImageButton2_Click(object sender, EventArgs e)
         {
-            
-           
+            /// çıkıiş yapmak
+            PL.FRM_LOGIN SHOWLOGIN = new FRM_LOGIN();
+            SHOWLOGIN.Show();
+            this.Hide();
         }
 
 
